@@ -1,23 +1,38 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '../views/Home.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
     {
-        path: '/',
-        name: 'Home',
-        component: Home,
+        path: '/signup',
+        name: 'signup',
+        component: () =>
+            import(/* webpackChunkName: "signup" */ '../views/Signup.vue'),
     },
     {
-        path: '/about',
-        name: 'About',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
+        path: '/signup_internet',
+        name: 'signup_internet',
         component: () =>
-            import(/* webpackChunkName: "about" */ '../views/About.vue'),
+            import(
+                /* webpackChunkName: "signup_internet" */ '../views/signup/Internet.vue'
+            ),
+    },
+    {
+        path: '/signup_cyborg',
+        name: 'signup_cyborg',
+        component: () =>
+            import(
+                /* webpackChunkName: "signup_cyborg" */ '../views/signup/Cyborg.vue'
+            ),
+    },
+    {
+        path: '/signup_referred',
+        name: 'signup_referred',
+        component: () =>
+            import(
+                /* webpackChunkName: "signup_referred" */ '../views/signup/Referred.vue'
+            ),
     },
 ];
 
