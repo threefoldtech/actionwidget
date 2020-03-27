@@ -67,8 +67,9 @@ Email address
 Mobile (optional)
 
 -> POST request 1 to API to save all the data
+/api/step1
 {
- "email" : "{email}", //regex check
+ "email_address" : "{email}", //regex check
  "mobile" : "mobile",
   "reserve_3bot" : true,
   "videoconf" : true,
@@ -87,7 +88,7 @@ NEXT ->
 - [ ] Are you interested to know more about our related digital currencies?
 
 -> POST request 2 to API to save all the data
-
+/api/step2
 {
     "email" : "sameemail"
     "referral" : true,
