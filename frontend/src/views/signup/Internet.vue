@@ -1,14 +1,13 @@
 <template>
     <div class="signup_internet">
         <v-container class="fill-height" fluid>
-            <v-card-text style="height: 300px; margin: -10px;" class="grey lighten-5 pa-0"></v-card-text>
             <v-row align="center" justify="center">
-                <v-card class=" mt-5 mx-auto" max-width="800" tile>
+                <v-card class=" mt-5 py-6 mx-auto" max-width="800" tile>
                     <v-list-item-group color="primary">
                         <v-list-item>
                             <v-list-item-icon>
                                 <v-simple-checkbox
-                                    value="true"
+                                    :value="true"
                                     disabled
                                 ></v-simple-checkbox>
                             </v-list-item-icon>
@@ -22,7 +21,7 @@
                         <v-list-item>
                             <v-list-item-icon>
                                 <v-simple-checkbox
-                                    value="true"
+                                    :value="true"
                                     disabled
                                 ></v-simple-checkbox>
                             </v-list-item-icon>
@@ -36,7 +35,7 @@
                         <v-list-item>
                             <v-list-item-icon>
                                 <v-simple-checkbox
-                                    value="true"
+                                    :value="true"
                                     disabled
                                 ></v-simple-checkbox>
                             </v-list-item-icon>
@@ -51,7 +50,7 @@
                         <v-list-item>
                             <v-list-item-icon>
                                 <v-simple-checkbox
-                                    value="true"
+                                    :value="true"
                                     disabled
                                 ></v-simple-checkbox>
                             </v-list-item-icon>
@@ -65,7 +64,7 @@
                         <v-list-item>
                             <v-list-item-icon>
                                 <v-simple-checkbox
-                                    value="true"
+                                    :value="true"
                                     disabled
                                 ></v-simple-checkbox>
                             </v-list-item-icon>
@@ -79,7 +78,7 @@
                         <v-list-item>
                             <v-list-item-icon>
                                 <v-simple-checkbox
-                                    value="true"
+                                    :value="true"
                                     disabled
                                 ></v-simple-checkbox>
                             </v-list-item-icon>
@@ -94,7 +93,7 @@
                         <v-list-item>
                             <v-list-item-icon>
                                 <v-simple-checkbox
-                                    value="true"
+                                    :value="true"
                                     disabled
                                 ></v-simple-checkbox>
                             </v-list-item-icon>

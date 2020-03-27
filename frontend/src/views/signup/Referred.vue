@@ -1,7 +1,15 @@
 <template>
     <div class="signup_referred">
-        <span></span>
-        <v-btn @click="authenticate">I have installed the app</v-btn>
+        <v-container class="fill-height" fluid>
+            <v-row align="center" justify="center">
+                <v-card class=" mt-5 py-6 mx-auto" max-width="800" tile>
+                    <span></span>
+                    <v-btn @click="authenticate"
+                        >I have installed the app</v-btn
+                    >
+                </v-card>
+            </v-row>
+        </v-container>
     </div>
 </template>
 
