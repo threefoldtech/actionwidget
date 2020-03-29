@@ -8,9 +8,9 @@ call to action widget
 
  I want an internet
 
-- which allows me to ownf my own data and digital life
+- which allows me to own my own data and digital life
 - where abuse of my information is not tolerated
--  without the need to burn crazy amounts of fossil fuel to provide my digital life
+- without the need to burn crazy amounts of fossil fuel to provide my digital life
 - where everyone has equal chances
 - where I can trust my country to protect my safety and rights
 - which is available everywhere in the world at a cost lower than today
@@ -59,7 +59,7 @@ Redirect to callback, to signup
 - [ ] I want to reserve my digital twin
 - [ ] I am interested to have my own video conferencing solution which allows me to communicate with everyone in the world
 - [ ] I am interested in a peer2peer alternative social media network for private & business usage
-- [ ] I am interested to learn more about become a farmer and provide internet capacity for people around me
+- [ ] I am interested to learn more about how to become a farmer and provide internet capacity for people around me
 - [ ] I am interested to know more about how to deploy my own IT solutions on this new internet (maybe not)
 
 ### I agree that…
@@ -68,7 +68,7 @@ Redirect to callback, to signup
 - [ ] We are allowed to email them 
 
 ```
-if email address is in signup already, dont ask, ask only mobile (user is logged in through 3botconnect)
+if email address is in signup already, don't ask, ask only mobile (user is logged in through 3botconnect)
 ```
 
 Email address 
@@ -77,10 +77,10 @@ Mobile (optional)
 -> POST request 1 to API to save all the data
 /api/step1
 {
- "email_address" : "{email}", //regex check
- "mobile" : "mobile",
+  "email_address" : "{email}", //regex check
+  "mobile" : "mobile",
   "reserve_3bot" : true,
-  "videoconf" : true,
+  "video_conf" : true,
   "social_media": true,
   "farmer" : true,
   "deploy_it" : true,
