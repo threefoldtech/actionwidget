@@ -44,9 +44,17 @@ Button: I have installed the app, continue -> redirect to 3botlogin
 Redirect to callback, to signup
 
 
+### Callback
 
+-> PUT api/referral_done 
+{
+  "referral_email_address": "referral_email_address",
+  "user_id": "user_id_of_referrer"
+}
 
 ### Sign up here section bottom of page (/signup):
+
+
 
 - [ ] I want to reserve my digital twin
 - [ ] I am interested to have my own video conferencing solution which allows me to communicate with everyone in the world
@@ -90,7 +98,7 @@ NEXT ->
 -> POST request 2 to API to save all the data
 /api/step2
 {
-    "email" : "sameemail"
+    "email_address" : "sameemail"
     "referral" : true,
     "currencies" : true
 }
@@ -115,7 +123,11 @@ Fill in at least 10 people you want to refer: (Start with 10 input boxes, add mo
 ...
 
 Submit
-
+-> PUT /api/referrer
+{
+  "secret" : "usersecret",
+  "referrer_email_address" : "thereferrer@emailaddress.com"
+}
 
 
 ### Emails to each person:
