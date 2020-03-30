@@ -18,7 +18,7 @@ def init():
     sql_referrals_done_entries = """ CREATE TABLE IF NOT EXISTS referrals_done_user (
                                     id INTEGER PRIMARY KEY,
                                     user_id INTEGER NOT NULL,
-                                    referral_email_address NOT NULL
+                                    referral_3bot_name NOT NULL
                                 ); """
 
     sql_user_entries = """ CREATE TABLE IF NOT EXISTS users (

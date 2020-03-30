@@ -2,11 +2,11 @@ from db import get_db
 import sqlite3
 import json
 
-class Referrals_Done_User:
-    def __init__(self, id, user_id, referral_email_address):
+class ReferralsDoneUser:
+    def __init__(self, id, user_id, referral_3bot_name):
         self.id = id
         self.user_id = user_id #user by whom referred
-        self.referral_email_address = referral_email_address
+        self.referral_3bot_name = referral_3bot_name
       
     def add(self):
         if self.id is not 0:
@@ -15,10 +15,10 @@ class Referrals_Done_User:
         con = get_db()
         cursor = con.cursor()
         with con:
-            cursor.execute("INSERT INTO referrals_done_user(user_id, referral_email_address) VALUES(?, ?)",
-                             [self.user_id, self.referral_email_address])
+            cursor.execute("INSERT INTO referrals_done_user(user_id, referral_3bot_name) VALUES(?, ?)",
+                             [self.user_id, self.referral_3bot_name])
         self.id = cursor.lastrowid
-        print("referrals_done_user added: ", self.id ,self.user_id, self.referral_email_address)
+        print("referrals_done_user added: ", self.id ,self.user_id, self.referral_3bot_name)
         return True
     
     def update(self):
@@ -28,17 +28,17 @@ class Referrals_Done_User:
         con = get_db()
         cursor = con.cursor()
         with con:
-            cursor.execute("UPDATE referrals_done_user SET user_id=?, referral_email_address=? where id = ?",
-                             [self.user_id, self.referral_email_address, self.id])
+            cursor.execute("UPDATE referrals_done_user SET user_id=?, referral_3bot_name=? where id = ?",
+                             [self.user_id, self.referral_3bot_name, self.id])
 
-        print("referrals_done_user updated: ", self.id, self.user_id, self.referral_email_address)
+        print("referrals_done_user updated: ", self.id, self.user_id, self.referral_3bot_name)
         return True
 
         
     def to_json(self):
         jsonobj = {}
         jsonobj['user_id'] = self.user_id
-        jsonobj['referral_email_address'] = self.referral_email_address
+        jsonobj['referral_3bot_name'] = self.referral_3bot_name
         return jsonobj
         
     @classmethod
@@ -58,7 +58,7 @@ class Referrals_Done_User:
         con = get_db()
         cursor = con.cursor()
         with con:
-            cursor.execute("SELECT * FROM referrals_done_user where referral_email_address=?", [email_address])
+            cursor.execute("SELECT * FROM referrals_done_user where referral_3bot_name=?", [email_address])
             entry = cursor.fetchone()
             return entry is not None #false is good
 

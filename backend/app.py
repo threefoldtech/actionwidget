@@ -11,8 +11,7 @@ import db
 import json
 
 from db.user import User
-from db.referrals_pending_user import Referrals_Pending_User
-from db.referrals_done_user import Referrals_Done_User
+from db.referrals_done_user import ReferralsDoneUser
 from db.object_encoder import ObjectEncoder
 app = Flask(__name__)
 
@@ -77,7 +76,7 @@ def step1(email_address):
 
 #Update referral token, currency and send email if needed
 @app.route('/api/set_referral_and_currency',  methods=['POST'])
-def step2():
+def set_referral_and_currency():
     content = request.get_json()
     referrer_token = content['user_referrer_token']
     referral = content['referral'] == 1
@@ -89,6 +88,8 @@ def step2():
 
     user.referral = referral
     user.currencies = currencies
+
+    user.update()
 
     if referral:
         # send email referral
@@ -103,43 +104,26 @@ def step2():
 
     return "true"
 
-#add pending referral to db
-@app.route('/api/referral_pending',  methods=['POST'])
-def add_referrer():
-        content = request.get_json()
-        referrer_token = content['referrer_token']
- 
-        referred_email_address = content['referred_email_address']
-        #get by referrer_token
-        user = User.get_by_referrer_token(referrer_token)
-        if user is None:
-            return "User not found", 404
-        #if users exists, add referral
-
-        referral_pending_user = Referrals_Pending_User(0, user.id, referred_email_address)
-        referral_pending_user.add()
-        
-        #send email
-        print('sending pending referral email')
-        msg = email_referred.get_email_referred_text(user.id)
-
-        send_email.send_email(referred_email_address,
-                    email_referred.get_email_referred_subject(), msg)
-        return "True"
-
-#endpoint to get referral_pending + referral done entries
-
-@app.route('/api/referral_pending',  methods=['GET'])
-def get_referrals_pending():
+@app.route('/api/referral_done',  methods=['POST'])
+def update_referral():
     content = request.get_json()
-    referrer_token = content['referrer_token']
+    #get by referrer_token
+    referral_3bot_name = content['referral_3bot_name']
+    user_id = content['user_id']
 
-    user = User.get_by_referrer_token(referrer_token)
+    user = User.get_by_id(user_id)
+
     if user is None:
-        return "User does not exists", 404
-    referrals = Referrals_Pending_User.get(user.id)
+        return "User not found", 404
+    
+    #if users exists, add referral => TODO check POI
+    if ReferralsDoneUser.check_already_referred_email_address(referral_3bot_name):
+        return "User already in referral program", 400
 
-    return json.dumps(referrals,  cls=ObjectEncoder)
+    referral_done = ReferralsDoneUser(0, user_id, referral_3bot_name) #if jan invites piet, user_id is jan's; email is piet's
+    referral_done.add()
+
+    return referral_3bot_name
 
 @app.route('/api/referral_done',  methods=['GET'])
 def get_referrals_done():
@@ -149,30 +133,10 @@ def get_referrals_done():
     user = User.get_by_referrer_token(referrer_token)
     if user is None:
         return "User does not exists", 404
-    referrals = Referrals_Done_User.get(user.id)
+    referrals = ReferralsDoneUser.get(user.id)
 
     return json.dumps(referrals,  cls=ObjectEncoder)
 
-@app.route('/api/referral_done',  methods=['POST'])
-def update_referral():
-    content = request.get_json()
-    #get by referrer_token
-    referral_email_address = content['referral_email_address']
-    user_id = content['user_id']
-
-    user = User.get_by_id(user_id)
-
-    if user is None:
-        return "User not found", 404
-    
-    #if users exists, add referral => TODO check POI
-    if Referrals_Done_User.check_already_referred_email_address(referral_email_address):
-        return "User already in referral program", 400
-
-    referral_done = Referrals_Done_User(0, user_id, referral_email_address)
-    referral_done.add()
-
-    return referral_email_address
 
 if __name__ == '__main__':
     db.init()

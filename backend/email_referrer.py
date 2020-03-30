@@ -13,7 +13,7 @@ Use this link to invite 10 people to join you:
 
 
 def get_email_referrer_text(secret):
-    return email_referral.format(LINK = "{}/referral?secret={}".format(config.URL, secret))
+    return email_referral.format(LINK = "{}/referral?referrer_token={}".format(config.URL, secret))
 
 def get_email_referrer_subject():
     return email_referral_subject

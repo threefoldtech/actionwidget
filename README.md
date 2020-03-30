@@ -46,9 +46,9 @@ Redirect to callback, to signup
 
 ### Callback
 
--> PUT api/referral_done 
+-> POST api/referral_done 
 {
-  "referral_email_address": "referral_email_address",
+  "referral_3bot_name": "referral_3bot_name",
   "user_id": "user_id_of_referrer",
   "POI": "user_proofofidentity" 
 }
@@ -133,3 +133,8 @@ Submit
 ### Emails to each person:
 
 You were referred by {person}, please click the link to accept the referral (/signup_referred?userid={userid})
+
+
+Postlink examples:
+
+https://www.getpostman.com/collections/4adb73589063e4f040df
