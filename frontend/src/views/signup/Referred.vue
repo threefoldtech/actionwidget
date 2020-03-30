@@ -28,11 +28,19 @@
                 );
                 const appid = config.appId;
 
+                var scope = JSON.stringify({ doubleName: true, email: true }); // { doubleName : true, email : false}
                 window.location.href = `${
                     config.botFrontEnd
-                }?state=${state}&appid=${appid}&publickey=${encodeURIComponent(
+                }?state=${state}&scope=${scope}&appid=${appid}&publickey=${encodeURIComponent(
                     CryptoService.getEdPkInCurve(keys.publicKey)
                 )}&redirecturl=${encodeURIComponent(config.redirect_url)}`;
+            },
+            async redirect(state, scope, appid, publicKey, redirectUrl) {
+                window.location.href = `${
+                    config.botFrontEnd
+                }?state=${state}&scope=${scope}&appid=${appid}&publickey=${encodeURIComponent(
+                    CryptoService.getEdPkInCurve(publicKey)
+                )}&redirecturl=${encodeURIComponent(redirectUrl)}`;
             },
         },
     };

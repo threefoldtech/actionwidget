@@ -11,6 +11,12 @@ const routes = [
             import(/* webpackChunkName: "signup" */ '../views/Signup.vue'),
     },
     {
+        path: '/callback',
+        name: 'callback',
+        component: () =>
+            import(/* webpackChunkName: "callback" */ '../views/Callback.vue'),
+    },
+    {
         path: '/signup_internet',
         name: 'signup_internet',
         component: () =>
