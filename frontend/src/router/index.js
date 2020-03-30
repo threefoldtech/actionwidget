@@ -18,7 +18,7 @@ const routes = [
     },
     {
         path: '/signup_internet',
-        name: 'signup_internet',
+        name: 'signup',
         component: () =>
             import(
                 /* webpackChunkName: "signup_internet" */ '../views/signup/Internet.vue'
@@ -26,7 +26,7 @@ const routes = [
     },
     {
         path: '/signup_cyborg',
-        name: 'signup_cyborg',
+        name: 'signup',
         component: () =>
             import(
                 /* webpackChunkName: "signup_cyborg" */ '../views/signup/Cyborg.vue'
@@ -34,7 +34,7 @@ const routes = [
     },
     {
         path: '/signup_referred',
-        name: 'signup_referred',
+        name: 'signup',
         component: () =>
             import(
                 /* webpackChunkName: "signup_referred" */ '../views/signup/Referred.vue'
