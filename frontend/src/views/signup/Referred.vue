@@ -14,26 +14,33 @@
 </template>
 
 <script>
-    // import config from '../../../public/config';
-    // const randomstring = require('randomstring')
-    //
-    // import CryptoService from '../../services/CryptoService'
+    import config from '../../../public/config';
+    import CryptoService from '../../services/CryptoService';
+    import randomstring from 'randomstring';
 
     export default {
         methods: {
             async authenticate() {
-                // const state = randomstring.generate();
-                // window.localStorage.setItem('state', state);
-                // const keys = await CryptoService.generateKeys(
-                //     config.seedPhrase
-                // );
-                // const appid = config.appId;
-                //
-                // window.location.href = `${
-                //     config.botFrontEnd
-                // }?state=${state}&appid=${appid}&publickey=${encodeURIComponent(
-                //     CryptoService.getEdPkInCurve(keys.publicKey)
-                // )}&redirecturl=${encodeURIComponent(config.redirect_url)}`;
+                const state = randomstring.generate();
+                window.localStorage.setItem('state', state);
+                const keys = await CryptoService.generateKeys(
+                    config.seedPhrase
+                );
+                const appid = config.appId;
+
+                var scope = JSON.stringify({ doubleName: true, email: true }); // { doubleName : true, email : false}
+                window.location.href = `${
+                    config.botFrontEnd
+                }?state=${state}&scope=${scope}&appid=${appid}&publickey=${encodeURIComponent(
+                    CryptoService.getEdPkInCurve(keys.publicKey)
+                )}&redirecturl=${encodeURIComponent(config.redirect_url)}`;
+            },
+            async redirect(state, scope, appid, publicKey, redirectUrl) {
+                window.location.href = `${
+                    config.botFrontEnd
+                }?state=${state}&scope=${scope}&appid=${appid}&publickey=${encodeURIComponent(
+                    CryptoService.getEdPkInCurve(publicKey)
+                )}&redirecturl=${encodeURIComponent(redirectUrl)}`;
             },
         },
     };
