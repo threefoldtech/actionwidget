@@ -49,7 +49,8 @@ Redirect to callback, to signup
 -> PUT api/referral_done 
 {
   "referral_email_address": "referral_email_address",
-  "user_id": "user_id_of_referrer"
+  "user_id": "user_id_of_referrer",
+  "POI": "user_proofofidentity" 
 }
 
 ### Sign up here section bottom of page (/signup):
@@ -74,10 +75,9 @@ if email address is in signup already, dont ask, ask only mobile (user is logged
 Email address 
 Mobile (optional)
 
--> POST request 1 to API to save all the data
-/api/step1
+-> PUT request 1 to API to save all the data
+/api/user/<email_address>
 {
- "email_address" : "{email}", //regex check
  "mobile" : "mobile",
   "reserve_3bot" : true,
   "videoconf" : true,
@@ -96,7 +96,7 @@ NEXT ->
 - [ ] Are you interested to know more about our related digital currencies?
 
 -> POST request 2 to API to save all the data
-/api/step2
+/api/set_referral_and_currency
 {
     "email_address" : "sameemail"
     "referral" : true,
@@ -115,7 +115,7 @@ Email -> depend on checkboxes
 
 Link to frontend (/referral?userid={id}):
 
-#### Page /referral?userid={id}&secret={usersecret}: 
+#### Page /referral?userid={id}&referrer_token={userreferrer_token}: 
 
 Fill in at least 10 people you want to refer: (Start with 10 input boxes, add more when 10 are full)
 ...
@@ -125,7 +125,7 @@ Fill in at least 10 people you want to refer: (Start with 10 input boxes, add mo
 Submit
 -> PUT /api/referrer
 {
-  "secret" : "usersecret",
+  "referrer_token" : "userreferrer_token",
   "referrer_email_address" : "thereferrer@emailaddress.com"
 }
 
