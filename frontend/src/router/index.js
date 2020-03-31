@@ -4,6 +4,7 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 const routes = [
+    { path: '/', redirect: { name: 'signup_internet' } },
     {
         path: '/signup',
         name: 'signup',
@@ -11,8 +12,8 @@ const routes = [
             import(/* webpackChunkName: "signup" */ '../views/Signup.vue'),
     },
     {
-        path: '/signup_step2',
-        name: 'signup',
+        path: '/signup_step_2',
+        name: 'signup_step_2',
         component: () =>
             import(
                 /* webpackChunkName: "signup_step_2" */ '../views/signup/Step2.vue'
@@ -26,7 +27,7 @@ const routes = [
     },
     {
         path: '/signup_internet',
-        name: 'signup',
+        name: 'signup_internet',
         component: () =>
             import(
                 /* webpackChunkName: "signup_internet" */ '../views/signup/Internet.vue'
@@ -34,7 +35,7 @@ const routes = [
     },
     {
         path: '/signup_cyborg',
-        name: 'signup',
+        name: 'signup_cyborg',
         component: () =>
             import(
                 /* webpackChunkName: "signup_cyborg" */ '../views/signup/Cyborg.vue'
@@ -47,6 +48,18 @@ const routes = [
             import(
                 /* webpackChunkName: "signup_referred" */ '../views/signup/Referred.vue'
             ),
+    },
+    {
+        path: '/thankyou',
+        name: 'thankyou',
+        component: () =>
+            import(/* webpackChunkName: "thankyou" */ '../views/Thankyou.vue'),
+    },
+    {
+        path: '/status',
+        name: 'status',
+        component: () =>
+            import(/* webpackChunkName: "status" */ '../views/Status.vue'),
     },
     {
         path: '/error',

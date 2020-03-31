@@ -1,10 +1,10 @@
 <template>
-    
+    <h1>status</h1>
 </template>
 
 <script>
     export default {
-        name: 'thankyou',
+        name: 'status',
     };
 </script>
 

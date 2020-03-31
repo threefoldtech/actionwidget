@@ -9,23 +9,59 @@
                         ref="form"
                         v-model="valid"
                     >
-                        <v-checkbox label="I want to reserve my digital twin" />
                         <v-checkbox
+                            v-model="reserve_3bot"
+                            label="I want to reserve my digital twin"
+                        />
+                        <v-checkbox
+                            v-model="videoconf"
                             label="I am interested to have my own video conferencing solution which allows me to communicate with everyone in the world"
                         />
                         <v-checkbox
+                            v-model="social_media"
                             label="I am interested in a peer2peer alternative social media network for private & business usage"
                         />
                         <v-checkbox
+                            v-model="farmer"
                             label="I am interested to learn more about become a farmer and provide internet capacity for people around me"
                         />
                         <v-checkbox
+                            v-model="deploy_it"
                             label="I am interested to know more about how to deploy my own IT solutions on this new internet (maybe not)"
                         />
+                        <span>I agree that</span>
+                        <v-checkbox
+                            v-model="gdpr"
+                            label="GDPR "
+                            :rules="[v => !!v || 'You must agree to continue!']"
+                        />
+                        <v-checkbox
+                            v-model="cookies"
+                            label="We are allowed to put cookies from our websites"
+                            :rules="[v => !!v || 'You must agree to continue!']"
+                        />
+                        <v-checkbox
+                            label="We are allowed to email them"
+                            :rules="[v => !!v || 'You must agree to continue!']"
+                        />
+                        <v-text-field
+                            v-model="signupEmail"
+                            :rules="emailRules"
+                            label="E-mail"
+                            required
+                            :disabled="!!email"
+                        ></v-text-field>
+                        <v-text-field
+                            v-model="mobile"
+                            :rules="mobileRules"
+                            label="Mobile"
+                            type="tel"
+                        ></v-text-field>
                         <v-btn
                             :disabled="!valid"
                             elevation="3"
-                            fab mini
+                            fab
+                            mini
                             color="#1072ba"
                             dark
                             class="btn__next"
@@ -47,19 +83,68 @@
     export default {
         data: () => ({
             valid: true,
+            signupEmail: '',
+            emailRules: [
+                v => !!v || 'E-mail is required',
+                v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+            ],
+            mobile: '',
+            mobileRules: [
+                v => {
+                    if (!v) {
+                        return true;
+                    }
+                    return (
+                        /^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$/.test(
+                            v
+                        ) || 'Mobile nr must be valid'
+                    );
+                },
+            ],
+            reserve_3bot: false,
+            videoconf: false,
+            social_media: false,
+            farmer: false,
+            deploy_it: false,
+            gdpr: false,
+            cookies: false,
         }),
         computed: {
             ...mapGetters(['email']),
         },
+        mounted() {
+            if (this.email) {
+                this.signupEmail = this.email;
+            }
+        },
         methods: {
+            ...mapMutations('set')
             async validateAndSubmit() {
                 if (!this.$refs.form.validate()) {
                     return;
                 }
 
-                await axios.put(`/api/user/${this.email}`, {});
+                const email = this.email || this.signupEmail;
 
-                router.push('signup_step_2');
+                const response = await axios.put(`/api/user`, {
+                    mobile: this.mobile,
+                    reserve_3bot: this.reserve_3bot,
+                    videoconf: this.videoconf,
+                    social_media: this.social_media,
+                    farmer: this.farmer,
+                    deploy_it: this.deploy_it,
+                    gdpr: this.gdpr,
+                    cookies: this.cookies,
+                    email_address: email,
+                });
+                if (!response.success) {
+                    await router.push('error');
+                    return;
+                }
+
+                const referrerToken = response.data.referrer_token;
+
+                await router.push('signup_step_2');
             },
         },
     };
