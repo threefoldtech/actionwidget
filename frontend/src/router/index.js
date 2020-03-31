@@ -36,6 +36,9 @@ const routes = [
     {
         path: '/signup_cyborg',
         name: 'signup_cyborg',
+        meta: {
+            title: 'signup',
+        },
         component: () =>
             import(
                 /* webpackChunkName: "signup_cyborg" */ '../views/signup/Cyborg.vue'
