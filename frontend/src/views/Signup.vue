@@ -144,6 +144,8 @@
 
                 const referrerToken = response.data.referrer_token;
 
+                console.log(referrerToken);
+
                 await router.push('signup_step_2');
             },
         },
