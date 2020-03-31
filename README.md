@@ -113,21 +113,15 @@ Email -> depend on checkboxes
 
 ### Referral program
 
-Link to frontend (/referral?userid={id}):
+Link to frontend status page (/referral?userid={id}):
 
-#### Page /referral?userid={id}&referrer_token={userreferrer_token}: 
+#### Page /status?verify_token={verify_token}
 
-Fill in at least 10 people you want to refer: (Start with 10 input boxes, add more when 10 are full)
-...
-...
-...
+Use this link to refer people to tf:
 
-Submit
--> PUT /api/referrer
-{
-  "referrer_token" : "userreferrer_token",
-  "referrer_email_address" : "thereferrer@emailaddress.com"
-}
+/signup_reffered?user_id={user_id}
+
+Number of people that have accepted your invitation: X
 
 
 ### Emails to each person:
