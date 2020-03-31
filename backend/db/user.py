@@ -27,7 +27,7 @@ class User:
         con = get_db()
         cursor = con.cursor()
         with con:
-            cursor.execute("INSERT INTO users(email_address, referrer_token, verify_token, mobile, reserve_3bot, videoconf, social_media, farmer, deploy_it, gdpr, cookies, email, referral, currencies, verified) VALUES(?, ?, ?, ? ,?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            cursor.execute("INSERT INTO users(email_address, referrer_token, verify_token, mobile, reserve_3bot, videoconf, social_media, farmer, deploy_it, gdpr, cookies, email, referral, currencies, verified) VALUES(?, ?, ?, ? ,?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)",
                              [self.email_address, self.referrer_token, self.verify_token, self.mobile, self.reserve_3bot, self.videoconf, self.social_media, self.farmer, self.deploy_it, self.gdpr, self.cookies, self.email, self.referral, self.currencies, self.verified])
         self.id = cursor.lastrowid
         print("User registered: ", self.email_address, self.referrer_token, self.verify_token, self.mobile,  self.reserve_3bot, self.videoconf, self.social_media, self.farmer, self.deploy_it, self.gdpr, self.cookies, self.email, self.referral, self.currencies, self.verified)
@@ -40,7 +40,7 @@ class User:
         con = get_db()
         cursor = con.cursor()
         with con:
-            cursor.execute("UPDATE users SET email_address=?, referrer_token=?, mobile=?, reserve_3bot=?, videoconf=?, social_media=?, farmer=?, deploy_it=?, gdpr=?, cookies=?, email=?, referral=?, currencies=?, verified=? where id = ?",
+            cursor.execute("UPDATE users SET email_address=?, referrer_token=?, verify_token=?, mobile=?, reserve_3bot=?, videoconf=?, social_media=?, farmer=?, deploy_it=?, gdpr=?, cookies=?, email=?, referral=?, currencies=?, verified=? where id = ?",
                              [self.email_address, self.referrer_token, self.verify_token, self.mobile, self.reserve_3bot, self.videoconf, self.social_media, self.farmer, self.deploy_it, self.gdpr, self.cookies, self.email, self.referral, self.currencies, self.verified, self.id])
 
         print("User updated: ", self.email_address, self.referrer_token, self.verify_token, self.mobile,  self.reserve_3bot, self.videoconf, self.social_media, self.farmer, self.deploy_it, self.gdpr, self.cookies, self.email, self.referral, self.currencies, self.verified)

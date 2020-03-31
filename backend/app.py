@@ -43,10 +43,9 @@ def step1():
     if 'currencies' in content:
         currencies = content['currencies'] == 1
 
+    existing_user = None
     if 'user_referrer_token' in content:
         existing_user = User.get_by_referrer_token(content['user_referrer_token'])
-    else:
-        return responses.errorObj(400, "can not update a user without referrer token"), 400
 
     # update if exists
     if existing_user is not None:
@@ -62,7 +61,7 @@ def step1():
         existing_user.referral = referral
         existing_user.currencies = currencies
         existing_user.update()
-        return  responses.successObj(200, existing_user.referrer_token)
+        return  responses.successObj(200, {"user_referrer_token": existing_user.referrer_token })
     
     # Insert if not
     user_referrer_token = str(uuid.uuid1())
@@ -70,8 +69,8 @@ def step1():
 
     user = User(0, email_address,user_referrer_token, user_verify_token, mobile, reserve_3bot, videoconf, social_media, farmer, deploy_it, gdpr, cookies, email)
     user.add()
-
-    return responses.successObj(200, user_referrer_token)
+    print("here")
+    return responses.successObj(200, {"user_referrer_token": user.referrer_token })
 
 
 
@@ -115,7 +114,7 @@ def set_referral_and_currency():
         # send email currencies
         print("not implemented")
 
-    return responses.successObj(200,"")
+    return responses.successObj(200, { "referral" : referral, "currencies": currencies})
 
 @app.route('/api/referral_done',  methods=['POST']) #TODO POI!!!
 def update_referral():
@@ -141,7 +140,7 @@ def update_referral():
 @app.route('/api/referral_done',  methods=['GET'])
 def get_referrals_done():
     content = request.get_json()
-    referrer_token = content['referrer_token']
+    referrer_token = content['user_referrer_token']
 
     user = User.get_by_referrer_token(referrer_token)
     if user is None:
