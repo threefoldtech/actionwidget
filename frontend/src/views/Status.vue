@@ -26,7 +26,7 @@
                 `/api/referral_done/${this.verifyToken}`
             );
         },
-        data: function() {
+        data: function () {
             return { verifyToken: null, referrals: null };
         },
     };
