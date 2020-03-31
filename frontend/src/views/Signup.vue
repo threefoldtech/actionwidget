@@ -41,6 +41,7 @@
                             :rules="[v => !!v || 'You must agree to continue!']"
                         />
                         <v-checkbox
+                            v-model="canSendEmail"
                             label="We are allowed to email them"
                             :rules="[v => !!v || 'You must agree to continue!']"
                         />
@@ -106,6 +107,7 @@
             social_media: false,
             farmer: false,
             deploy_it: false,
+            canSendEmail: false,
             gdpr: false,
             cookies: false,
         }),
@@ -136,6 +138,7 @@
                     gdpr: this.gdpr,
                     cookies: this.cookies,
                     email_address: email,
+                    email: this.canSendEmail,
                 });
                 if (!response.success) {
                     await router.push('error');
