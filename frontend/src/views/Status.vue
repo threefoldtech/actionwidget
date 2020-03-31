@@ -24,7 +24,7 @@
                 `/api/verify_user/${this.verifyToken}`
             );
 
-            const refererToken = response.data.data.referer_token;
+            const refererToken = response.data.data.referrer_token;
 
             this.referrals = await axios.get(
                 `/api/referral_done/${refererToken}`
