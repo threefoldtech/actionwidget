@@ -20,7 +20,7 @@
             }
             this.verifyToken = this.$route.query.verify_token;
 
-            await axios.get(`/api/verify_user/${this.verifyToken}`);
+            await axios.post(`/api/verify_user/${this.verifyToken}`);
 
             this.referrals = await axios.get(
                 `/api/referral_done/${this.verifyToken}`
