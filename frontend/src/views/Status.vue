@@ -20,13 +20,17 @@
             }
             this.verifyToken = this.$route.query.verify_token;
 
-            await axios.post(`/api/verify_user/${this.verifyToken}`);
+            const response = await axios.post(
+                `/api/verify_user/${this.verifyToken}`
+            );
+
+            const refererToken = response.data.data.referer_token;
 
             this.referrals = await axios.get(
-                `/api/referral_done/${this.verifyToken}`
+                `/api/referral_done/${referer_token}`
             );
         },
-        data: function () {
+        data: function() {
             return { verifyToken: null, referrals: null };
         },
     };
