@@ -106,7 +106,7 @@ def set_referral_and_currency():
     if referral:
         # send email referral
         print("sending to ", user.email_address)
-        msg = email_referrer.get_email_referrer_text(referrer_token)
+        msg = email_referrer.get_email_referrer_text(user.verify_token)
         send_email.send_email(user.email_address,
                 email_referrer.get_email_referrer_subject(), msg)
         print("Send complete!")
@@ -130,7 +130,7 @@ def update_referral():
     
     #if users exists, add referral => TODO check POI
     if ReferralsDoneUser.check_already_referred_3bot_name(referral_3bot_name):
-        return responses.errorObj(400, "User already in referral program")
+        return responses.successObj(200,referral_3bot_name) # the user installed 3bot connect so this is ok
 
     referral_done = ReferralsDoneUser(0, user_id, referral_3bot_name) #if jan invites piet, user_id is jan's; email is piet's
     referral_done.add()
