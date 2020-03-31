@@ -1,6 +1,8 @@
 <template>
     <div class="status">
         <h1>status</h1>
+        invitelink: {{refererToken}}
+        <v-btn :to="{name: 'signup_reffered', params:{'userid': userId}}">test</v-btn>
         <code>
             {{ referrals }}
         </code>
@@ -24,14 +26,15 @@
                 `/api/verify_user/${this.verifyToken}`
             );
 
-            const refererToken = response.data.data.referrer_token;
+            this.refererToken = response.data.data.referrer_token;
+            this.userId = response.data.data.user_id;
 
-            this.referrals = await axios.get(
-                `/api/referral_done/${refererToken}`
-            );
+            this.referrals = (
+                await axios.get(`/api/referral_done/${this.refererToken}`)
+            ).data.data;
         },
         data: function() {
-            return { verifyToken: null, referrals: null };
+            return { verifyToken: null, referrals: null, refererToken: null, userId: null };
         },
     };
 </script>
