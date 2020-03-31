@@ -1,9 +1,41 @@
 <template>
     <div class="status">
-        <h1>status</h1>
-        <code>
-            {{ referrals }}
-        </code>
+        <v-container class="fill-height" fluid>
+            <v-row align="center" justify="center">
+                <v-card class="mt-5 py-6 mx-auto" width="800" tile>
+                    <v-container fluid>
+                        <v-row>
+                            <v-col cols="12" sm="12">
+                                <p>
+                                    Copy following url to invite friends to the
+                                    3bot app
+                                </p>
+                            </v-col>
+                            <v-col cols="12" sm="6">
+                                <v-text-field
+                                    label="linkske"
+                                    single-line
+                                    append-icon="fas fa-copy"
+                                ></v-text-field>
+                            </v-col>
+                        </v-row>
+                        <v-row>
+                            <v-col cols="12" sm="12">
+                                <h2>referred users ({{referrals.length}})</h2> 
+                            </v-col>
+                            <v-col cols="12" sm="12">
+                                <v-data-table
+                                    :headers="headers"
+                                    :items="referrals"
+                                    :items-per-page="10"
+                                    class="elevation-1"
+                                ></v-data-table>
+                            </v-col>
+                        </v-row>
+                    </v-container>
+                </v-card>
+            </v-row>
+        </v-container>
     </div>
 </template>
 
@@ -31,7 +63,17 @@
             );
         },
         data: function() {
-            return { verifyToken: null, referrals: null };
+            return {
+                verifyToken: 'sdfsdfsdf',
+                referrals: null,
+                headers: [
+                    {
+                        text: '3Bot Name',
+                        align: 'start',
+                        value: '3BotName',
+                    },
+                ],
+            };
         },
     };
 </script>
