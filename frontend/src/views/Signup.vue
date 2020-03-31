@@ -118,7 +118,7 @@
             }
         },
         methods: {
-            ...mapMutations('set')
+            // ...mapMutations('set'),
             async validateAndSubmit() {
                 if (!this.$refs.form.validate()) {
                     return;
