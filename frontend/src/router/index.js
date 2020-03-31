@@ -8,12 +8,18 @@ const routes = [
     {
         path: '/signup',
         name: 'signup',
+        meta: {
+            title: 'Signup',
+        },
         component: () =>
             import(/* webpackChunkName: "signup" */ '../views/Signup.vue'),
     },
     {
         path: '/signup_step_2',
         name: 'signup_step_2',
+        meta: {
+            title: 'Signup',
+        },
         component: () =>
             import(
                 /* webpackChunkName: "signup_step_2" */ '../views/signup/Step2.vue'
@@ -22,12 +28,18 @@ const routes = [
     {
         path: '/callback/:userid',
         name: 'callback',
+        meta: {
+            title: 'Callback',
+        },
         component: () =>
             import(/* webpackChunkName: "callback" */ '../views/Callback.vue'),
     },
     {
         path: '/signup_internet',
         name: 'signup_internet',
+        meta: {
+            title: 'Signup',
+        },
         component: () =>
             import(
                 /* webpackChunkName: "signup_internet" */ '../views/signup/Internet.vue'
@@ -37,7 +49,7 @@ const routes = [
         path: '/signup_cyborg',
         name: 'signup_cyborg',
         meta: {
-            title: 'signup',
+            title: 'Signup',
         },
         component: () =>
             import(
@@ -46,7 +58,10 @@ const routes = [
     },
     {
         path: '/signup_referred',
-        name: 'signup',
+        name: 'signup_referred',
+        meta: {
+            title: 'Signup',
+        },
         component: () =>
             import(
                 /* webpackChunkName: "signup_referred" */ '../views/signup/Referred.vue'
@@ -55,18 +70,27 @@ const routes = [
     {
         path: '/thankyou',
         name: 'thankyou',
+        meta: {
+            title: 'Thank you',
+        },
         component: () =>
             import(/* webpackChunkName: "thankyou" */ '../views/Thankyou.vue'),
     },
     {
         path: '/status',
         name: 'status',
+        meta: {
+            title: 'Status',
+        },
         component: () =>
             import(/* webpackChunkName: "status" */ '../views/Status.vue'),
     },
     {
         path: '/error',
         name: 'error',
+        meta: {
+            title: 'Error',
+        },
         component: () =>
             import(/* webpackChunkName: "error" */ '../views/Error.vue'),
     },
