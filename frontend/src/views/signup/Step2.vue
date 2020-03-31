@@ -9,18 +9,13 @@
                         ref="form"
                         v-model="valid"
                     >
-                        <v-checkbox label="I want to reserve my digital twin" />
                         <v-checkbox
-                            label="I am interested to have my own video conferencing solution which allows me to communicate with everyone in the world"
+                            v-model="referral"
+                            label="Do you want to refer us to others and be part of our referral program."
                         />
                         <v-checkbox
-                            label="I am interested in a peer2peer alternative social media network for private & business usage"
-                        />
-                        <v-checkbox
-                            label="I am interested to learn more about become a farmer and provide internet capacity for people around me"
-                        />
-                        <v-checkbox
-                            label="I am interested to know more about how to deploy my own IT solutions on this new internet (maybe not)"
+                            v-model="currencies"
+                            label="Are you interested to know more about our related digital currencies?"
                         />
                         <v-btn
                             :disabled="!valid"
@@ -42,19 +37,35 @@
 <script>
     import axios from 'axios';
     import router from '../../router';
+    import { mapGetters } from 'vuex';
 
     export default {
         name: 'Step2',
+        mounted() {
+            if (!this.$store.getters.referrerToken) {
+                router.push('error');
+            }
+        },
+        computed: {
+            ...mapGetters(['userId', 'referrerToken']),
+        },
         methods: {
             async validateAndSubmit() {
                 if (!this.$refs.form.validate()) {
                     return;
                 }
 
-                await axios.put(`/api/set_referral_and_currency`, {});
+                await axios.post(`/api/set_referral_and_currency`, {
+                    user_referrer_token: this.referrerToken,
+                    referral: this.referral,
+                    currencies: this.currencies,
+                });
 
-                router.push('signup_step_2');
+                router.push('thankyou');
             },
+        },
+        data() {
+            return { valid: true, referral: false, currencies: false };
         },
     };
 </script>

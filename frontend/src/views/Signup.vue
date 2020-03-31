@@ -79,7 +79,7 @@
 <script>
     import router from '../router';
     import axios from 'axios';
-    import { mapGetters } from 'vuex';
+    import { mapGetters, mapMutations } from 'vuex';
 
     export default {
         data: () => ({
@@ -112,7 +112,7 @@
             cookies: false,
         }),
         computed: {
-            ...mapGetters(['email']),
+            ...mapGetters(['email', 'referrerToken']),
         },
         mounted() {
             if (this.email) {
@@ -120,7 +120,7 @@
             }
         },
         methods: {
-            // ...mapMutations('set'),
+            ...mapMutations(['setReferrerToken']),
             async validateAndSubmit() {
                 if (!this.$refs.form.validate()) {
                     return;
@@ -140,15 +140,14 @@
                     email_address: email,
                     email: this.canSendEmail,
                 });
-                if (!response.success) {
+                if (!response.data.success) {
                     await router.push('error');
                     return;
                 }
 
-                const referrerToken = response.data.referrer_token;
+                const referrerToken = response.data.data.user_referrer_token;
 
-                console.log(referrerToken);
-
+                this.setReferrerToken(referrerToken);
                 await router.push('signup_step_2');
             },
         },

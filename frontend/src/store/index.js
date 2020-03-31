@@ -7,6 +7,7 @@ export default new Vuex.Store({
     state: {
         email: null,
         userId: null,
+        referrerToken: null,
     },
     mutations: {
         setEmail(state, email) {
@@ -15,10 +16,14 @@ export default new Vuex.Store({
         setUserId(state, userId) {
             state.userId = userId;
         },
+        setReferrerToken(state, referrerToken) {
+            state.referrerToken = referrerToken;
+        },
     },
     getters: {
         email: state => state.email,
         userId: state => state.userId,
+        referrerToken: state => state.referrerToken,
     },
     modules: {},
 });
