@@ -98,7 +98,8 @@
                         fab
                         mini
                         to="signup"
-                        color="primary"
+                        color="#1072ba"
+                        dark
                         >next</v-btn
                     >
                 </v-card>
@@ -107,10 +108,3 @@
         </v-container>
     </div>
 </template>
-<style lang="scss" scoped>
-    .btn__next{
-        position: absolute;
-        right: 10px;
-        bottom: -28px;
-    }
-</style>

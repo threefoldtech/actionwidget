@@ -31,8 +31,11 @@
                         ></v-checkbox>
                         <v-btn
                             :disabled="!valid"
-                            color="success"
-                            class="mr-4"
+                            elevation="3"
+                            fab mini
+                            color="#1072ba"
+                            dark
+                            class="btn__next"
                             @click="validate"
                         >
                             Next

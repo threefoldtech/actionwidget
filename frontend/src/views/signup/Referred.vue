@@ -45,10 +45,3 @@
         },
     };
 </script>
-<style lang="scss" scoped>
-    .btn__next{
-        position: absolute;
-        right: 10px;
-        bottom: -28px;
-    }
-</style>

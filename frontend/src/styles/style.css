@@ -11,3 +11,8 @@ h1{
   line-height: 0.8;
   color: #3c3c3b;
 }
+.btn__next{
+  position: absolute;
+  right: 10px;
+  bottom: -28px;
+}

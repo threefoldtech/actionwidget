@@ -108,17 +108,10 @@
                             </v-list-item-content>
                         </v-list-item>
                     </v-list-item-group>
-                    <v-btn class="btn__next" elevation="3" fab mini to="signup" color="primary">next</v-btn>
+                    <v-btn class="btn__next" color="#1072ba" elevation="3" fab mini to="signup" dark>next</v-btn>
                 </v-card>
             </v-row>
             <v-row align="center" justify="center"></v-row>
         </v-container>
     </div>
 </template>
-<style lang="scss" scoped>
-    .btn__next{
-        position: absolute;
-        right: 10px;
-        bottom: -28px;
-    }
-</style>
