@@ -9,6 +9,7 @@ import email_referred
 import uuid
 import db
 import json
+import responses
 
 from db.user import User
 from db.referrals_done_user import ReferralsDoneUser
@@ -16,17 +17,18 @@ from db.object_encoder import ObjectEncoder
 app = Flask(__name__)
 
 
-@app.route('/api/user/<email_address>',  methods=['PUT'])
-def step1(email_address):
+@app.route('/api/user',  methods=['PUT'])
+def step1():
     content = request.get_json()
-    
-    #Check if email is valid, if user is not  in referral program already
-    if not validate_email(email_address):
-        return "Email address invalid", 400
 
-    #Set fields for user
+    email_address = content['email_address']
+    # check if email is valid, if user is not  in referral program already
+    if not validate_email(email_address):
+        return responses.errorObj(400, "email_address invalid")
+
+    # set fields for user
     mobile = content['mobile']
-    reserve_3bot = content['reserve_3bot'] == 1 #check if we can remove this, seems obsolete
+    reserve_3bot = content['reserve_3bot'] == 1 # check if we can remove this, seems obsolete
     videoconf = content['videoconf'] == 1
     social_media = content['social_media'] == 1
     farmer = content['farmer'] == 1
@@ -34,25 +36,20 @@ def step1(email_address):
     gdpr = content['gdpr'] == 1
     cookies = content['cookies'] == 1
     email = content['email'] == 1
-    user_referrer_token = str(uuid.uuid1())
-    referral = False
-    currencies = False
 
-    #optional parameters
+    # optional parameters
     if 'referral' in content:
         referral = content['referral'] == 1
     if 'currencies' in content:
         currencies = content['currencies'] == 1
 
-    existing_user = User.get_by_email_address(email_address)
-    
-    #update if exists
+    if 'user_referrer_token' in content:
+        existing_user = User.get_by_referrer_token(content['user_referrer_token'])
+    else:
+        return responses.errorObj(400, "can not update a user without referrer token"), 400
+
+    # update if exists
     if existing_user is not None:
-        if 'user_referrer_token' not in content:
-            return "can not update a user without user_referrer_token", 400
-        if existing_user.referrer_token != content['user_referrer_token']:
-            return "user_referrer_token does not match", 400
-        
         existing_user.mobile = mobile
         existing_user.reserve_3bot = reserve_3bot
         existing_user.videoconf = videoconf
@@ -64,15 +61,31 @@ def step1(email_address):
         existing_user.email = email
         existing_user.referral = referral
         existing_user.currencies = currencies
-
         existing_user.update()
-        return  existing_user.referrer_token, 200 
+        return  responses.successObj(200, existing_user.referrer_token)
     
-    #Insert if not
-    user = User(0, email_address,user_referrer_token , mobile, reserve_3bot, videoconf, social_media, farmer, deploy_it, gdpr, cookies, email)
+    # Insert if not
+    user_referrer_token = str(uuid.uuid1())
+    user_verify_token = str(uuid.uuid1())
+
+    user = User(0, email_address,user_referrer_token, user_verify_token, mobile, reserve_3bot, videoconf, social_media, farmer, deploy_it, gdpr, cookies, email)
     user.add()
 
-    return user_referrer_token, 200
+    return responses.successObj(200, user_referrer_token)
+
+
+
+@app.route('/api/verify_user/<user_verify_token>',  methods=['POST'])
+def verify(user_verify_token):
+   
+    user = User.get_by_verify_token(user_verify_token)
+    if user is None:
+         return responses.errorObj(404, "User not found")
+    user.verified = True
+    user.update()
+
+    return responses.successObj(200, user)
+
 
 #Update referral token, currency and send email if needed
 @app.route('/api/set_referral_and_currency',  methods=['POST'])
@@ -84,7 +97,7 @@ def set_referral_and_currency():
     
     user = User.get_by_referrer_token(referrer_token)
     if user is None:
-        return "User does not exists", 404
+        return responses.errorObj(404, "User does not exists")
 
     user.referral = referral
     user.currencies = currencies
@@ -102,9 +115,9 @@ def set_referral_and_currency():
         # send email currencies
         print("not implemented")
 
-    return "true"
+    return responses.successObj(200,"")
 
-@app.route('/api/referral_done',  methods=['POST'])
+@app.route('/api/referral_done',  methods=['POST']) #TODO POI!!!
 def update_referral():
     content = request.get_json()
     #get by referrer_token
@@ -114,16 +127,16 @@ def update_referral():
     user = User.get_by_id(user_id)
 
     if user is None:
-        return "User not found", 404
+        return responses.errorObj(404, "User not found")
     
     #if users exists, add referral => TODO check POI
     if ReferralsDoneUser.check_already_referred_email_address(referral_3bot_name):
-        return "User already in referral program", 400
+        return responses.errorObj(400, "User already in referral program")
 
     referral_done = ReferralsDoneUser(0, user_id, referral_3bot_name) #if jan invites piet, user_id is jan's; email is piet's
     referral_done.add()
 
-    return referral_3bot_name
+    return responses.successObj(200,referral_3bot_name)
 
 @app.route('/api/referral_done',  methods=['GET'])
 def get_referrals_done():
@@ -132,10 +145,10 @@ def get_referrals_done():
 
     user = User.get_by_referrer_token(referrer_token)
     if user is None:
-        return "User does not exists", 404
+         return responses.errorObj(404, "User not found")
     referrals = ReferralsDoneUser.get(user.id)
 
-    return json.dumps(referrals,  cls=ObjectEncoder)
+    return responses.successObj(200,json.dumps(referrals,  cls=ObjectEncoder))
 
 
 if __name__ == '__main__':
