@@ -129,7 +129,7 @@ def update_referral():
         return responses.errorObj(404, "User not found")
     
     #if users exists, add referral => TODO check POI
-    if ReferralsDoneUser.check_already_referred_email_address(referral_3bot_name):
+    if ReferralsDoneUser.check_already_referred_3bot_name(referral_3bot_name):
         return responses.errorObj(400, "User already in referral program")
 
     referral_done = ReferralsDoneUser(0, user_id, referral_3bot_name) #if jan invites piet, user_id is jan's; email is piet's

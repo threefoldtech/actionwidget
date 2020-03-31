@@ -54,11 +54,11 @@ class ReferralsDoneUser:
             return referrals
             
     @staticmethod
-    def check_already_referred_email_address(email_address):
+    def check_already_referred_3bot_name(tb_name):
         con = get_db()
         cursor = con.cursor()
         with con:
-            cursor.execute("SELECT * FROM referrals_done_user where referral_3bot_name=?", [email_address])
+            cursor.execute("SELECT * FROM referrals_done_user where referral_3bot_name=?", [tb_name])
             entry = cursor.fetchone()
             return entry is not None #false is good
 
