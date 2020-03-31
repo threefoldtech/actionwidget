@@ -17,8 +17,20 @@
     import config from '../../../public/config';
     import CryptoService from '../../services/CryptoService';
     import randomstring from 'randomstring';
+    import router from '../../router';
 
     export default {
+        data() {
+            return {
+                userid: null,
+            };
+        },
+        mounted() {
+            if (!this.$route.query.userid) {
+                router.push('error');
+            }
+            this.userid = this.$route.query.userid;
+        },
         methods: {
             async authenticate() {
                 const state = randomstring.generate();
@@ -28,20 +40,22 @@
                 );
                 const appid = config.appId;
 
-                var scope = JSON.stringify({ doubleName: true, email: true }); // { doubleName : true, email : false}
-                window.location.href = `${
-                    config.botFrontEnd
-                }?state=${state}&scope=${scope}&appid=${appid}&publickey=${encodeURIComponent(
+                const scope = JSON.stringify({ doubleName: true, email: true }); // { doubleName : true, email : false}
+                const redirectUrl = encodeURIComponent(
+                    `${config.redirect_url}/${this.userid}`
+                );
+                const publicKey = encodeURIComponent(
                     CryptoService.getEdPkInCurve(keys.publicKey)
-                )}&redirecturl=${encodeURIComponent(config.redirect_url)}`;
-            },
-            async redirect(state, scope, appid, publicKey, redirectUrl) {
-                window.location.href = `${
-                    config.botFrontEnd
-                }?state=${state}&scope=${scope}&appid=${appid}&publickey=${encodeURIComponent(
-                    CryptoService.getEdPkInCurve(publicKey)
-                )}&redirecturl=${encodeURIComponent(redirectUrl)}`;
+                );
+                window.location.href = `${config.botFrontEnd}?state=${state}&scope=${scope}&appid=${appid}&publickey=${publicKey}&redirecturl=${redirectUrl}`;
             },
         },
     };
 </script>
+<style lang="scss" scoped>
+    .btn__next {
+        position: absolute;
+        right: 10px;
+        bottom: -28px;
+    }
+</style>

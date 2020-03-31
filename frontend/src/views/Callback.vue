@@ -8,6 +8,9 @@
     import config from '../../public/config';
     import cryptoService from '../services/CryptoService';
     import threebotService from '../services/threebotService';
+    import router from '../router';
+    import axios from 'axios';
+    import { mapMutations } from 'vuex';
 
     export default {
         name: 'callback',
@@ -19,6 +22,10 @@
             };
         },
         async mounted() {
+            if (!this.$route.params.userid) {
+                router.push('error');
+            }
+
             let url = new URL(window.location.href);
 
             let error = url.searchParams.get('error');
@@ -93,7 +100,7 @@
                         )
                     )
                 );
-                console.log({verifiedSignedAttempt});
+                console.log({ verifiedSignedAttempt });
 
                 if (!verifiedSignedAttempt) {
                     console.log('The signedAttempt could not be verified.');
@@ -130,7 +137,7 @@
                 )
             );
 
-            console.log({decryptedData});
+            console.log({ decryptedData });
             decryptedData['name'] = user;
 
             // SEI = Signed Email Identifier, this is used to link the email to the doubleName and verify it.
@@ -156,7 +163,19 @@
                 `We verified that ${seiVerified.data.email} belongs to ${seiVerified.data.identifier} and has a valid verification.`
             );
 
+            // @todo: error handling
+            await axios.post('/api/referral_done', {
+                referral_3bot_name: seiVerified.data.identifier,
+                user_id: this.$route.params.userid,
+            });
+            this.setEmail(seiVerified.data.email);
+            this.setUserId(this.$route.params.userid);
+
             //@todo use callback
+            router.push('signup');
+        },
+        methods: {
+            ...mapMutations(['setEmail', 'setUserId']),
         },
     };
 </script>

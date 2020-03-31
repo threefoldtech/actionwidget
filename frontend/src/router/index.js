@@ -11,7 +11,15 @@ const routes = [
             import(/* webpackChunkName: "signup" */ '../views/Signup.vue'),
     },
     {
-        path: '/callback',
+        path: '/signup_step2',
+        name: 'signup_step_2',
+        component: () =>
+            import(
+                /* webpackChunkName: "signup_step_2" */ '../views/signup/Step2.vue'
+            ),
+    },
+    {
+        path: '/callback/:userid',
         name: 'callback',
         component: () =>
             import(/* webpackChunkName: "callback" */ '../views/Callback.vue'),
@@ -39,6 +47,12 @@ const routes = [
             import(
                 /* webpackChunkName: "signup_referred" */ '../views/signup/Referred.vue'
             ),
+    },
+    {
+        path: '/error',
+        name: 'error',
+        component: () =>
+            import(/* webpackChunkName: "error" */ '../views/Error.vue'),
     },
 ];
 

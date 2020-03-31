@@ -1,5 +1,5 @@
 <template>
-    <div class="signup">
+    <div class="signup__step2">
         <v-container class="fill-height" fluid>
             <v-row align="center" justify="center">
                 <v-card class=" mt-5 py-6 mx-auto" max-width="800" tile>
@@ -24,12 +24,9 @@
                         />
                         <v-btn
                             :disabled="!valid"
-                            elevation="3"
-                            fab mini
-                            color="#1072ba"
-                            dark
-                            class="btn__next"
                             @click="validateAndSubmit"
+                            class="mr-4"
+                            color="success"
                         >
                             Next
                         </v-btn>
@@ -39,25 +36,20 @@
         </v-container>
     </div>
 </template>
+
 <script>
-    import router from '../router';
     import axios from 'axios';
-    import { mapGetters } from 'vuex';
+    import router from '../../router';
 
     export default {
-        data: () => ({
-            valid: true,
-        }),
-        computed: {
-            ...mapGetters(['email']),
-        },
+        name: 'Step2',
         methods: {
             async validateAndSubmit() {
                 if (!this.$refs.form.validate()) {
                     return;
                 }
 
-                await axios.put(`/api/user/${this.email}`, {});
+                await axios.put(`/api/set_referral_and_currency`, {});
 
                 router.push('signup_step_2');
             },
