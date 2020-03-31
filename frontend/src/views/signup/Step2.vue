@@ -25,11 +25,15 @@
                         <v-btn
                             :disabled="!valid"
                             @click="validateAndSubmit"
-                            class="mr-4"
-                            color="success"
+                            class="btn__next"
+                            fab
+                            mini
+                            
+                            color="#1072ba"
                         >
                             Next
                         </v-btn>
+
                     </v-form>
                 </v-card>
             </v-row>

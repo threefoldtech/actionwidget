@@ -5,14 +5,16 @@
   }
 
 h1{
-  margin-bottom: 0.75rem;
+
+  letter-spacing: 3px;
   font-family: "Bebas Neue", cursive;
   /* font-weight: bold; */
+  font-size: 40px;
   line-height: 0.8;
   color: #3c3c3b;
 }
 .btn__next{
   position: absolute;
   right: 10px;
-  bottom: -28px;
+  bottom: -35px;
 }
