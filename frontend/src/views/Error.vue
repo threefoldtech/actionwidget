@@ -4,11 +4,10 @@
             <v-row align="center" justify="center">
                 <v-card
                     class="mt-5 py-6 mx-auto"
-                    min-width="500"
-                    max-width="800"
+                    width="800"
                     tile
                 >
-                    <p class="ma-4">there was an error</p>
+                    <p class="ma-4 text-center">Ooops, something went wrong! <br><br>Please contact info@threefold.io when this problems occors again.</p>
                 </v-card>
             </v-row>
             <v-row align="center" justify="center"></v-row>
