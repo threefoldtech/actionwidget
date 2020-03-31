@@ -76,18 +76,21 @@ Email address
 Mobile (optional)
 
 -> PUT request 1 to API to save all the data
-/api/user/<email_address>
+/api/user
 {
  "mobile" : "mobile",
-  "reserve_3bot" : true,
-  "videoconf" : true,
-  "social_media": true,
-  "farmer" : true,
-  "deploy_it" : true,
-  "gdpr: true,
-  "cookies": true,
-  "email" : true
-}
+ "email_address" : "jonas.delrue@jimber.org",
+ "reserve_3bot" : true,
+ "videoconf" : true,
+ "social_media": true,
+ "farmer" : true,
+ "deploy_it" : true,
+ "gdpr": true,
+ "cookies": true,
+ "email" : true
+ }
+
+Returns referrer_token
 
 NEXT ->
 

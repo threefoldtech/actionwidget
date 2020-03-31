@@ -137,12 +137,10 @@ def update_referral():
 
     return responses.successObj(200,referral_3bot_name)
 
-@app.route('/api/referral_done',  methods=['GET'])
-def get_referrals_done():
-    content = request.get_json()
-    referrer_token = content['user_referrer_token']
+@app.route('/api/referral_done/<user_referrer_token>',  methods=['GET'])
+def get_referrals_done(user_referrer_token):
 
-    user = User.get_by_referrer_token(referrer_token)
+    user = User.get_by_referrer_token(user_referrer_token)
     if user is None:
          return responses.errorObj(404, "User not found")
     referrals = ReferralsDoneUser.get(user.id)
