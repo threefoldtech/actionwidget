@@ -2,7 +2,7 @@
     <div class="signup_cyborg">
         <v-container class="fill-height" fluid>
             <v-row align="center" justify="center">
-                <v-card class=" mt-5 py-6 mx-auto" max-width="800" tile>
+                <v-card class="mt-5 py-6 mx-auto" max-width="800" tile>
                     <v-list-item-group color="primary">
                         <v-list-item>
                             <v-list-item-icon>
@@ -108,4 +108,3 @@
         </v-container>
     </div>
 </template>
-

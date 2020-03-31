@@ -2,7 +2,7 @@
     <div class="signup__step2">
         <v-container class="fill-height" fluid>
             <v-row align="center" justify="center">
-                <v-card class=" mt-5 py-6 mx-auto" max-width="800" tile>
+                <v-card class="mt-5 py-6 mx-auto" max-width="800" tile>
                     <v-form
                         class="ma-5"
                         lazy-validation
@@ -28,12 +28,10 @@
                             class="btn__next"
                             fab
                             mini
-                            
                             color="#1072ba"
                         >
                             Next
                         </v-btn>
-
                     </v-form>
                 </v-card>
             </v-row>
