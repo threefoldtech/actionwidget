@@ -23,6 +23,6 @@ networks:
     actionwidget_network:
     proxynet:
         external:
-            name: ${NETWORK}
+            name: ${DOCKER_NETWORK}
 volumes:
     database_volume:
