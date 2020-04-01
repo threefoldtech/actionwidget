@@ -23,7 +23,7 @@
 
 <script>
     export default {
-        name: 'progress',
+        name: 'Progress',
         props: { step: { type: String, default: null, required: false } },
     };
 </script>
