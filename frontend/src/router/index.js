@@ -54,7 +54,18 @@ const routes = [
         component: () =>
             import(
                 /* webpackChunkName: "signup_cyborg" */ '../views/signup/Cyborg.vue'
-            ),
+                ),
+    },
+    {
+        path: '/intro',
+        name: 'intro',
+        meta: {
+            title: 'intro',
+        },
+        component: () =>
+            import(
+                /* webpackChunkName: "intro" */ '../views/intro.vue'
+                ),
     },
     {
         path: '/signup_referred',
