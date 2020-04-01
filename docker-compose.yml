@@ -4,7 +4,7 @@ services:
         build:
             context: ./backend
         container_name: actionwidget_backend
-        image: jimber/actionwidget_backend
+        image: jimber/actionwidget_backend:${CI_COMMIT_TAG}"
         restart: always
         # volumes:
         #     - todo
@@ -14,7 +14,7 @@ services:
         build:
             context: ./frontend
         container_name: actionwidget_frontend
-        image: jimber/actionwidget_frontend
+        image: jimber/actionwidget_frontend:${CI_COMMIT_TAG}"
         restart: always
         networks:
             - actionwidget_network
