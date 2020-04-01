@@ -77,7 +77,7 @@ const routes = [
         path: '/:site?/intro',
         name: 'intro',
         meta: {
-            title: 'intro',
+            title: 'A new Internet for the planet and for humanity.',
         },
         component: () =>
             import(/* webpackChunkName: "intro" */ '../views/intro.vue'),
