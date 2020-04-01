@@ -82,5 +82,10 @@
         methods: {
             ...mapMutations(['setUserId']),
         },
+        mounted() {
+            if (this.$route.params.userid) {
+                this.setUserId(this.$route.params.userid);
+            }
+        },
     };
 </script>

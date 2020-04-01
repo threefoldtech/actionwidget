@@ -105,7 +105,7 @@ const routes = [
             ),
     },
     {
-        path: '/:site?/signup_referred/',
+        path: '/:site?/signup_referred/:userid',
         name: 'signup_referred',
         meta: {
             title: 'Signup',
