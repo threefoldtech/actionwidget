@@ -76,7 +76,10 @@
 
             this.referrerToken = response.data.data.referrer_token;
             this.userId = response.data.data.id;
-            this.referralUrl = `http://localhost:8080/signup_referred?userid=${this.userId}`;
+            const host = window.location.host;
+            const protocol = window.location.protocol;
+            const baseUrl = `${protocol}//${host}`;
+            this.referralUrl = `${baseUrl}/signup_referred?userid=${this.userId}`;
             const referralResponse = await axios.get(
                 `/api/referral_done/${this.referrerToken}`
             );

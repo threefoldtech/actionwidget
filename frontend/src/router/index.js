@@ -22,7 +22,6 @@ const routes = [
         component: () =>
             import(/* webpackChunkName: "error" */ '../views/Error.vue'),
     },
-    { path: '/:site?/', redirect: { name: 'signup_internet' } },
     {
         path: '/:site?/signup',
         name: 'signup',
@@ -103,7 +102,7 @@ const routes = [
         component: () =>
             import(/* webpackChunkName: "thankyou" */ '../views/Thankyou.vue'),
     },
-
+    { path: '/:site?/', redirect: { name: 'signup_internet' } },
 ];
 
 const router = new VueRouter({
