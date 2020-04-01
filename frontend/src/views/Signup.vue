@@ -132,7 +132,10 @@
                 }
 
                 const email = this.email || this.signupEmail;
-                this.loading=true;
+                this.loading = true;
+
+                const host3botName = this.$route.params.site || '';
+
                 const response = await axios.put(`/api/user`, {
                     mobile: this.mobile,
                     reserve_3bot: this.reserve_3bot,
@@ -144,6 +147,7 @@
                     cookies: this.cookies,
                     email_address: email,
                     email: this.canSendEmail,
+                    host_3bot_name: host3botName,
                 });
                 if (!response.data.success) {
                     await router.push('error');

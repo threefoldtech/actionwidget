@@ -16,12 +16,17 @@
                                     :label="referralUrl"
                                     disabled
                                     single-line
-                                    >{{ referralUrl }}</v-text-field>                                 
+                                    >{{ referralUrl }}</v-text-field
+                                >
                             </v-col>
                             <v-col cols="1" sm="1" class="pt-6">
-                                    <v-btn icon v-clipboard="referralUrl" >
-                                        <v-icon>fas fa-copy</v-icon>
-                                    </v-btn>
+                                <v-btn
+                                    icon
+                                    v-if="referralUrl"
+                                    v-clipboard="referralUrl"
+                                >
+                                    <v-icon>fas fa-copy</v-icon>
+                                </v-btn>
                             </v-col>
                         </v-row>
                         <v-row v-if="referrals.length">
@@ -37,11 +42,11 @@
                                 ></v-data-table>
                             </v-col>
                         </v-row>
-                         <v-row v-else>
+                        <v-row v-else>
                             <v-col cols="12" sm="12">
                                 <h2>No referred users</h2>
                             </v-col>
-                        </v-row>                       
+                        </v-row>
                     </v-container>
                 </v-card>
             </v-row>
@@ -52,9 +57,9 @@
 <script>
     import router from '../router';
     import axios from 'axios';
-    import Vue       from 'vue'
-    import Clipboard from 'v-clipboard'
-    Vue.use(Clipboard)
+    import Vue from 'vue';
+    import Clipboard from 'v-clipboard';
+    Vue.use(Clipboard);
 
     export default {
         name: 'status',
@@ -71,11 +76,11 @@
 
             this.referrerToken = response.data.data.referrer_token;
             this.userId = response.data.data.id;
-            this.referralUrl = "http://localhost:8080/signup_referred?userid=" + this.userId;
-            this.referrals = JSON.parse((
-                await axios.get(`/api/referral_done/${this.referrerToken}`)
-            ).data.data);
-
+            this.referralUrl = `http://localhost:8080/signup_referred?userid=${this.userId}`;
+            const referralResponse = await axios.get(
+                `/api/referral_done/${this.referrerToken}`
+            );
+            this.referrals = JSON.parse(referralResponse.data.data);
         },
         data: function() {
             return {
@@ -90,8 +95,8 @@
                         align: 'start',
                         value: 'referral_3bot_name',
                     },
-                ]
-            }
-        }
-    }
+                ],
+            };
+        },
+    };
 </script>
