@@ -3,6 +3,7 @@
         <v-container class="fill-height" fluid>
             <v-row align="center" justify="center">
                 <v-card class="mt-5 py-6 mx-auto" width="800" tile>
+                    <Progress/>
                     <v-container fluid>
                         <v-row>
                             <v-col cols="12" sm="12">
@@ -53,9 +54,13 @@
                         </v-row>
                         <v-row align="center" justify="center">
                             <v-col cols="12" sm="6">
-                            <v-btn @click="authenticate" v-bind:disabled="!installed" color="#1072ba" class="white--text"
-                                >Login</v-btn
-                            >
+                                <v-btn
+                                    @click="authenticate"
+                                    v-bind:disabled="!installed"
+                                    color="#1072ba"
+                                    class="white--text"
+                                    >Login</v-btn
+                                >
                             </v-col>
                         </v-row>
                     </v-container>
@@ -75,7 +80,7 @@
         data() {
             return {
                 userid: null,
-                installed: false
+                installed: false,
             };
         },
         mounted() {
