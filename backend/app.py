@@ -36,7 +36,7 @@ def step1():
     gdpr = content['gdpr'] == 1
     cookies = content['cookies'] == 1
     email = content['email'] == 1
-    referral_url = content['referral_url']
+    host_3bot_name = content['host_3bot_name']
 
     # optional parameters
     if 'referral' in content:
@@ -61,7 +61,7 @@ def step1():
         existing_user.email = email
         existing_user.referral = referral
         existing_user.currencies = currencies
-        existing_user.referral_url = referral_url
+        existing_user.host_3bot_name = host_3bot_name
         existing_user.update()
         return  responses.successObj(200, {"user_referrer_token": existing_user.referrer_token })
     
@@ -69,7 +69,7 @@ def step1():
     user_referrer_token = str(uuid.uuid4())
     user_verify_token = str(uuid.uuid4())
 
-    user = User(0, email_address,user_referrer_token, user_verify_token, referral_url, mobile, reserve_3bot, videoconf, social_media, farmer, deploy_it, gdpr, cookies, email)
+    user = User(0, email_address,user_referrer_token, user_verify_token, host_3bot_name, mobile, reserve_3bot, videoconf, social_media, farmer, deploy_it, gdpr, cookies, email)
     user.add()
     print("here")
     return responses.successObj(200, {"user_referrer_token": user.referrer_token })
