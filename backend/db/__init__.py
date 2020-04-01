@@ -26,6 +26,7 @@ def init():
                                     email_address text NOT NULL,
                                     referrer_token text NOT NULL,
                                     verify_token text NOT NULL,
+                                    host_3bot_name text NOT NULL,
                                     mobile text NOT NULL,
                                     reserve_3bot integer NOT NULL,
                                     videoconf integer NOT NULL,

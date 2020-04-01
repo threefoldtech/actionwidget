@@ -59,6 +59,8 @@
                             validate-on-blur
                             label="Mobile"
                             type="tel"
+                            hint="optional"
+                            persistent-hint
                         ></v-text-field>
                         <v-btn
                             :disabled="!valid"

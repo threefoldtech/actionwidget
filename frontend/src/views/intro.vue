@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
     <div class="intro__page">
  <v-container class="fill-height" fluid>
             <v-row align="center" justify="center">
@@ -38,6 +39,24 @@
                         color="#1072ba"
                         dark
                         ><v-icon class="ml-1">fas fa-chevron-right</v-icon></v-btn
+=======
+    <div class="signup_internet">
+        <v-container class="fill-height" fluid>
+            <v-row align="center" justify="center">
+                <v-card class="mt-5 py-6 mx-auto" max-width="800" tile>
+                    <v-list-item-group color="primary">
+                       intro text here
+                    </v-list-item-group>
+                    <v-btn
+                        class="btn__next"
+                        color="#1072ba"
+                        elevation="3"
+                        fab
+                        mini
+                        to="signup"
+                        dark
+                        >next</v-btn
+>>>>>>> a28f04cc6d3f12ba467bd2face86e40b91769cbd
                     >
                 </v-card>
             </v-row>
