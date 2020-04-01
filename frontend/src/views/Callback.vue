@@ -162,9 +162,8 @@
             console.log(
                 `We verified that ${seiVerified.data.email} belongs to ${seiVerified.data.identifier} and has a valid verification.`
             );
-
             // @todo: error handling
-            await axios.post('/api/referral_done', {
+            axios.post('/api/referral_done', {
                 referral_3bot_name: seiVerified.data.identifier,
                 user_id: this.$route.params.userid,
             });
@@ -172,7 +171,7 @@
             this.setUserId(this.$route.params.userid);
 
             //@todo use callback
-            router.push('signup');
+            await router.push({ name: 'signup' });
         },
         methods: {
             ...mapMutations(['setEmail', 'setUserId']),

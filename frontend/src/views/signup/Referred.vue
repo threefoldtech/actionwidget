@@ -2,11 +2,63 @@
     <div class="signup_referred">
         <v-container class="fill-height" fluid>
             <v-row align="center" justify="center">
-                <v-card class="mt-5 py-6 mx-auto" max-width="800" tile>
-                    <span></span>
-                    <v-btn @click="authenticate"
-                        >I have installed the app</v-btn
-                    >
+                <v-card class="mt-5 py-6 mx-auto" width="800" tile>
+                    <v-container fluid>
+                        <v-row>
+                            <v-col cols="12" sm="12">
+                                <p>
+                                    Please install the install 3bot Connect app
+                                </p>
+                            </v-col>
+                            <v-col cols="12" sm="6">
+                                <a
+                                    href="https://play.google.com/store/apps/details?id=org.jimber.threebotlogin"
+                                    target="_blank"
+                                >
+                                    <v-img
+                                        :src="
+                                            require('@/assets/googleplay.png')
+                                        "
+                                        aspect-ratio="1"
+                                        height="60"
+                                        width="210"
+                                    ></v-img>
+                                </a>
+                            </v-col>
+                            <v-col cols="12" sm="6">
+                                <a
+                                    href="https://apps.apple.com/be/app/3bot-login/id1459845885?l=nl"
+                                    target="_blank"
+                                >
+                                    <v-img
+                                        :src="
+                                            require('@/assets/app-store-icon.png')
+                                        "
+                                        aspect-ratio="1"
+                                        height="60"
+                                        width="210"
+                                    ></v-img>
+                                </a>
+                            </v-col>
+                        </v-row>
+                        <v-row>
+                            <v-col cols="12" sm="6">
+                                <v-checkbox
+                                    v-model="installed"
+                                    :label="
+                                        `I've installed the 3Bot connect app`
+                                    "
+                                ></v-checkbox>
+                            </v-col>
+                        </v-row>
+                        <v-row align="center" justify="center">
+                            <v-col cols="12" sm="6">
+                            <v-btn @click="authenticate" v-bind:disabled="!installed" color="#1072ba" class="white--text"
+                                >Login</v-btn
+                            >
+                            </v-col>
+                        </v-row>
+                    </v-container>
                 </v-card>
             </v-row>
         </v-container>
@@ -23,6 +75,7 @@
         data() {
             return {
                 userid: null,
+                installed: false
             };
         },
         mounted() {
