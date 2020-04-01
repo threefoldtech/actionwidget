@@ -32,8 +32,9 @@ deploy:environment:staging:
     only:
         - /^(\d+\.)?(\d+\.)?(\*|\d+)$/
     script:
-        - docker-compose -f docker-compose-staging.yaml pull
-        - docker-compose -f docker-compose-staging.yaml up -d
+        - export DOCKER_NETWORK=jimber_proxy_net
+        - docker-compose pull
+        - docker-compose -d
 
 deploy:environment:production:
     stage: deploy
@@ -43,5 +44,6 @@ deploy:environment:production:
         - /^(\d+\.)?(\d+\.)?(\*|\d+)$/
     when: manual
     script:
+        - export DOCKER_NETWORK=3proxynet
         - docker-compose pull
         - docker-compose up -d
