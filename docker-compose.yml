@@ -1,0 +1,28 @@
+version: "3.7"
+services:
+    backend:
+        build:
+            context: ./backend
+        container_name: actionwidget_backend
+        image: actionwidget_backend
+        restart: always
+        # volumes:
+        #     - todo
+        networks:
+            - actionwidget_network
+    frontend:
+        build:
+            context: ./frontend
+        container_name: actionwidget_frontend
+        image: actionwidget_frontend
+        restart: always
+        networks:
+            - actionwidget_network
+            - 3proxynet
+networks:
+    actionwidget_network:
+    3proxynet:
+        external:
+            name: 3proxynet
+volumes:
+    database_volume:
