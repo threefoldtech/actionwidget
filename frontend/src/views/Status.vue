@@ -79,7 +79,7 @@
             const host = window.location.host;
             const protocol = window.location.protocol;
             const baseUrl = `${protocol}//${host}`;
-            this.referralUrl = `${baseUrl}/signup_referred?userid=${this.userId}`;
+            this.referralUrl = `${baseUrl}/intro/${this.userId}`;
             const referralResponse = await axios.get(
                 `/api/referral_done/${this.referrerToken}`
             );
