@@ -57,6 +57,8 @@
                             :rules="mobileRules"
                             label="Mobile"
                             type="tel"
+                            hint="optional"
+                            persistent-hint="true"
                         ></v-text-field>
                         <v-btn
                             :disabled="!valid"
