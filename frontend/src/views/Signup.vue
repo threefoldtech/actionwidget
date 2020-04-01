@@ -50,11 +50,13 @@
                             :rules="emailRules"
                             label="E-mail"
                             required
+                            validate-on-blur
                             :disabled="!!email"
                         ></v-text-field>
                         <v-text-field
                             v-model="mobile"
                             :rules="mobileRules"
+                            validate-on-blur
                             label="Mobile"
                             type="tel"
                         ></v-text-field>
@@ -64,11 +66,11 @@
                             fab
                             mini
                             color="#1072ba"
-                            dark
-                            class="btn__next"
+                            class="btn__next white--text"
+                            :loading="loading"
                             @click="validateAndSubmit"
                         >
-                            Next
+                            <v-icon class="ml-1">fas fa-chevron-right</v-icon>
                         </v-btn>
                     </v-form>
                 </v-card>
@@ -110,6 +112,7 @@
             canSendEmail: false,
             gdpr: false,
             cookies: false,
+            loading: false,
         }),
         computed: {
             ...mapGetters(['email', 'referrerToken']),
@@ -127,7 +130,7 @@
                 }
 
                 const email = this.email || this.signupEmail;
-
+                this.loading=true;
                 const response = await axios.put(`/api/user`, {
                     mobile: this.mobile,
                     reserve_3bot: this.reserve_3bot,

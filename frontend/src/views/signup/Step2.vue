@@ -19,13 +19,14 @@
                         />
                         <v-btn
                             :disabled="!valid"
+                            :loading="loading"
                             @click="validateAndSubmit"
-                            class="btn__next"
+                            class="btn__next white--text"
                             fab
                             mini
                             color="#1072ba"
                         >
-                            Next
+                            <v-icon class="ml-1">fas fa-chevron-right</v-icon>
                         </v-btn>
                     </v-form>
                 </v-card>
@@ -54,7 +55,7 @@
                 if (!this.$refs.form.validate()) {
                     return;
                 }
-
+                this.loading= true;
                 await axios.post(`/api/set_referral_and_currency`, {
                     user_referrer_token: this.referrerToken,
                     referral: this.referral,
@@ -65,7 +66,7 @@
             },
         },
         data() {
-            return { valid: true, referral: false, currencies: false };
+            return { valid: true, referral: false, currencies: false, loading: false };
         },
     };
 </script>

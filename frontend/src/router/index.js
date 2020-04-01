@@ -93,6 +93,15 @@ const routes = [
         },
         component: () =>
             import(/* webpackChunkName: "error" */ '../views/Error.vue'),
+    },    
+    {
+        path: '/intro',
+        name: 'intro',
+        meta: {
+            title: 'The need for a more responsible Internet.',
+        },
+        component: () =>
+            import(/* webpackChunkName: "error" */ '../views/intro.vue'),
     },
 ];
 
