@@ -4,7 +4,7 @@ services:
         build:
             context: ./backend
         container_name: actionwidget_backend
-        image: actionwidget_backend
+        image: jimber/actionwidget_backend
         restart: always
         # volumes:
         #     - todo
@@ -14,7 +14,7 @@ services:
         build:
             context: ./frontend
         container_name: actionwidget_frontend
-        image: actionwidget_frontend
+        image: jimber/actionwidget_frontend
         restart: always
         networks:
             - actionwidget_network
