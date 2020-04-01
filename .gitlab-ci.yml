@@ -4,6 +4,8 @@ stages:
 
 build:frontend:
     stage: build
+    tags:
+        - builder
     only:
       - /^(\d+\.)?(\d+\.)?(\*|\d+)$/
     script:
@@ -22,10 +24,21 @@ build:backend:
         - docker-compose build backend
         - docker-compose push backend
 
-deploy:environment:
+
+deploy:environment:staging:
     stage: deploy
     tags:
-        - deploy-prod
+        - deploy-staging
+    only:
+        - /^(\d+\.)?(\d+\.)?(\*|\d+)$/
+    script:
+        - docker-compose -f docker-compose-staging.yaml pull
+        - docker-compose -f docker-compose-staging.yaml up -d
+
+deploy:environment:production:
+    stage: deploy
+    tags:
+        - deploy-production
     only:
         - /^(\d+\.)?(\d+\.)?(\*|\d+)$/
     when: manual
