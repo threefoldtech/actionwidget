@@ -11,7 +11,7 @@
                                     <h3 class="mb-2">
                                         The need for a more responsible
                                         Internet.
-                                    </h3>
+                                    </h3><br>
                                     <p>
                                         We use the Internet every day, yet most
                                         of us don’t know, or think, too much

@@ -7,53 +7,37 @@
                     <v-container fluid>
                         <v-row>
                             <v-col cols="12" sm="12">
-                                <p>
-                                    We use the Internet every day, yet most of
-                                    us don’t know, or think, too much about it.
-                                    How does the Internet work? Who runs / owns
-                                    it? Is it good? Bad? Neutral?<br /><br />
+                                <h3>I acknowledge that</h3>
+                            </v-col>
+                            <v-col cols="12" sm="12">
+                               <ul class="ml-4">
+                                   <li>It is not acceptable that 50% of the global population remains without Internet access today</li>
 
-                                    Despite serving our daily needs rather well
-                                    until today, the Internet is now reaching a
-                                    critical point. It now struggles with global
-                                    data demands, and the overly-complex
-                                    architecture behind it is rather
-                                    centralized, making it inefficient and
-                                    unsustainable.<br /><br />
+                                   <li>The Internet is using too much energy (10% of the world's electricity)</li>
 
-                                    Did you know that about half of the world’s
-                                    population remains unconnected to the
-                                    Internet? High infrastructure and
-                                    distribution costs make the Internet
-                                    inaccessible to many.<br /><br />
+                                   <li>The global neutral Internet is disappearing (cut into pieces, firewalls installed everywhere, my data being abused, fake or manipulated information)</li>
+                                   <li>I have become a cyborg, in a way, as my devices such as my smartphone and laptop have become extensions of myself</li>
+                                   <li>Those devices aren’t owned by me. I am part of some big AI-driven Internet cloud</li>
+                               </ul>
+                            </v-col>
+                        </v-row>
+                         <v-row>
+                            <v-col cols="12" sm="12">
+                                <h3>Therefore, I declare that the Internet should</h3>
+                            </v-col>
+                            <v-col cols="12" sm="12">
+                               <ul class="ml-4">
+                                   <li>Be available everywhere in the world at a cost lower than today</li>
 
-                                    According to some statistics, the Internet
-                                    industry today is worth in the trillions of
-                                    dollars, 80% of which is owned by less than
-                                    20 companies that profit out of users' data.
-                                    Doesn’t seem fair, does it?<br /><br />
+                                   <li>Provide everyone with equal chances to learn, partake and succeed</li>
 
-                                    We see a lot in the press about the airline
-                                    industry’s negative impact on the
-                                    environment, yet the Internet consumes
-                                    between 5% and 10% of global energy. With
-                                    growing demand from users and emerging
-                                    technologies such as Internet of Things,
-                                    artificial intelligence, or blockchain, this
-                                    is expected to increase rapidly in the near
-                                    future.<br /><br />
-
-                                    A new Internet is needed, for both our
-                                    planet and for humanity. One that is owned
-                                    by the people. One that is equal to all and
-                                    provides data ownership to its users. One
-                                    that is environmentally-conscious. And one
-                                    that can support all our innovations and
-                                    experiences.<br /><br />
-
-                                    This Internet does exist. Follow the next
-                                    steps.
-                                </p>
+                                   <li>Be sustainable for the planet and life</li>
+                                   <li>Respect basic human rights</li>
+                                   <li>Give me full ownership of my data and help me protect it</li>
+                                   <li>Not abuse my personal information – we should not tolerate the way things are today</li>
+                                   <li>Be available to my country to protect my individual rights and safety</li>
+                                   <li>GBe supported by a token that enables me to use on demand</li>
+                               </ul>
                             </v-col>
                         </v-row>
                     </v-container>

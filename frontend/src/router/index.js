@@ -75,7 +75,7 @@ const routes = [
     },
     {
         path: '/:site?/intro/:userid?',
-        name: 'intro',
+        name: 'Intro',
         meta: {
             title: 'A new Internet for the planet and for humanity.',
         },
@@ -86,7 +86,7 @@ const routes = [
         path: '/:site?/declaration',
         name: 'declaration',
         meta: {
-            title: 'declaration',
+            title: 'Declaration',
         },
         component: () =>
             import(

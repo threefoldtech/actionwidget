@@ -10,6 +10,24 @@
                         ref="form"
                         v-model="valid"
                     >
+
+                         <v-text-field
+                            v-model="signupEmail"
+                            :rules="emailRules"
+                            label="E-mail"
+                            required
+                            validate-on-blur
+                            :disabled="!!email"
+                        ></v-text-field>
+                        <v-text-field
+                            v-model="mobile"
+                            :rules="mobileRules"
+                            validate-on-blur
+                            label="Mobile"
+                            type="tel"
+                            hint="optional"
+                            persistent-hint
+                        ></v-text-field>
                         <v-checkbox
                             v-model="reserve_3bot"
                             label="I want to reserve my digital twin"
@@ -30,7 +48,7 @@
                             v-model="deploy_it"
                             label="I am interested to know more about how to deploy my own IT solutions on this new internet (maybe not)"
                         />
-                        <span>I agree that</span>
+                        <h3>I agree that</h3>
                         <v-checkbox
                             v-model="gdpr"
                             label="GDPR "
@@ -46,23 +64,7 @@
                             label="We are allowed to email them"
                             :rules="[v => !!v || 'You must agree to continue!']"
                         />
-                        <v-text-field
-                            v-model="signupEmail"
-                            :rules="emailRules"
-                            label="E-mail"
-                            required
-                            validate-on-blur
-                            :disabled="!!email"
-                        ></v-text-field>
-                        <v-text-field
-                            v-model="mobile"
-                            :rules="mobileRules"
-                            validate-on-blur
-                            label="Mobile"
-                            type="tel"
-                            hint="optional"
-                            persistent-hint
-                        ></v-text-field>
+
                         <v-btn
                             :disabled="!valid"
                             elevation="3"
