@@ -31,7 +31,6 @@
             let error = url.searchParams.get('error');
 
             if (error) {
-                console.error(error);
                 return;
             }
 
