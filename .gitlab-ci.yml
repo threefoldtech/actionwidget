@@ -1,0 +1,49 @@
+stages:
+    - build
+    - deploy
+
+build:frontend:
+    stage: build
+    tags:
+        - builder
+    only:
+      - /^(\d+\.)?(\d+\.)?(\*|\d+)$/
+    script:
+        - echo "$DOCKER_PW" | docker login -u $DOCKER_USER --password-stdin
+        - docker-compose build frontend
+        - docker-compose push frontend
+
+build:backend:
+    stage: build
+    tags:
+        - builder
+    only:
+      - /^(\d+\.)?(\d+\.)?(\*|\d+)$/
+    script:
+        - echo "$DOCKER_PW" | docker login -u $DOCKER_USER --password-stdin
+        - docker-compose build backend
+        - docker-compose push backend
+
+
+deploy:environment:staging:
+    stage: deploy
+    tags:
+        - deploy-staging
+    only:
+        - /^(\d+\.)?(\d+\.)?(\*|\d+)$/
+    script:
+        - export DOCKER_NETWORK=jimber_proxy_net
+        - docker-compose pull
+        - docker-compose up -d
+
+deploy:environment:production:
+    stage: deploy
+    tags:
+        - deploy-production
+    only:
+        - /^(\d+\.)?(\d+\.)?(\*|\d+)$/
+    when: manual
+    script:
+        - export DOCKER_NETWORK=3proxynet
+        - docker-compose pull
+        - docker-compose up -d

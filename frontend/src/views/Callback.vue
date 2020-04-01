@@ -31,7 +31,6 @@
             let error = url.searchParams.get('error');
 
             if (error) {
-                console.error(error);
                 return;
             }
 
@@ -100,26 +99,21 @@
                         )
                     )
                 );
-                console.log({ verifiedSignedAttempt });
 
                 if (!verifiedSignedAttempt) {
-                    console.log('The signedAttempt could not be verified.');
                     return;
                 }
 
                 let state = window.localStorage.getItem('state');
 
                 if (verifiedSignedAttempt['signedState'] !== state) {
-                    console.log('The state cannot be matched.');
                     return;
                 }
 
                 if (verifiedSignedAttempt['doubleName'] !== user) {
-                    console.log('The name cannot be matched.');
                     return;
                 }
             } catch (e) {
-                console.log('The signedAttempt could not be verified.');
                 return;
             }
 
@@ -137,14 +131,10 @@
                 )
             );
 
-            console.log({ decryptedData });
             decryptedData['name'] = user;
 
             // SEI = Signed Email Identifier, this is used to link the email to the doubleName and verify it.
             if (!decryptedData.email || !decryptedData.email.sei) {
-                console.log(
-                    'No sei was given from the app, if your app requires email, the flow stops here.'
-                );
                 return;
             }
             // To verify the SEI, you could use the function implemented by openKYC or verify it yourself using openKYC his publicKey.
@@ -153,15 +143,9 @@
             );
 
             if (!seiVerified || seiVerified.status !== 200) {
-                console.log(
-                    'sei could not be verified, something went wrong or someone is trying to forge his email verification.'
-                );
+
                 return;
             }
-
-            console.log(
-                `We verified that ${seiVerified.data.email} belongs to ${seiVerified.data.identifier} and has a valid verification.`
-            );
             // @todo: error handling
             axios.post('/api/referral_done', {
                 referral_3bot_name: seiVerified.data.identifier,

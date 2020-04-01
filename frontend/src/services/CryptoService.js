@@ -11,7 +11,6 @@ export default {
         publicKey = decodeBase64(publicKey);
         signature = decodeBase64(signature);
         const result = sodium.crypto_sign_open(signature, publicKey);
-        console.log(result);
         return result;
     },
     async validateSignedAttempt(signedAttempt, publicKey) {
