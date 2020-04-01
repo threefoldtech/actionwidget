@@ -34,7 +34,7 @@ deploy:environment:staging:
     script:
         - export DOCKER_NETWORK=jimber_proxy_net
         - docker-compose pull
-        - docker-compose -d
+        - docker-compose up -d
 
 deploy:environment:production:
     stage: deploy
