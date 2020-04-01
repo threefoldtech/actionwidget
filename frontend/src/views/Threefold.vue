@@ -3,6 +3,7 @@
         <v-container class="fill-height" fluid>
             <v-row align="center" justify="center">
                 <v-card class="mt-5 py-6 mx-auto" max-width="800" tile>
+                    <Progress step="3" />
                     <v-container fluid>
                         <v-row>
                             <v-col cols="12" sm="12">
@@ -62,7 +63,7 @@
                         elevation="3"
                         fab
                         mini
-                        to="signup_internet"
+                        to="signup"
                         color="#1072ba"
                         dark
                         ><v-icon class="ml-1"

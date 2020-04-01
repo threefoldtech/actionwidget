@@ -74,16 +74,38 @@ const routes = [
             ),
     },
     {
-        path: '/:site?/intro',
+        path: '/:site?/intro/:userid?',
         name: 'intro',
         meta: {
             title: 'intro',
         },
         component: () =>
-            import(/* webpackChunkName: "intro" */ '../views/intro.vue'),
+            import(/* webpackChunkName: "intro" */ '../views/Intro.vue'),
     },
     {
-        path: '/:site?/signup_referred',
+        path: '/:site?/declaration',
+        name: 'declaration',
+        meta: {
+            title: 'declaration',
+        },
+        component: () =>
+            import(
+                /* webpackChunkName: "declaration" */ '../views/Declaration.vue'
+            ),
+    },
+    {
+        path: '/:site?/threefold',
+        name: 'threefold',
+        meta: {
+            title: 'Threefold',
+        },
+        component: () =>
+            import(
+                /* webpackChunkName: "threefold" */ '../views/Threefold.vue'
+            ),
+    },
+    {
+        path: '/:site?/signup_referred/',
         name: 'signup_referred',
         meta: {
             title: 'Signup',
@@ -102,7 +124,7 @@ const routes = [
         component: () =>
             import(/* webpackChunkName: "thankyou" */ '../views/Thankyou.vue'),
     },
-    { path: '/:site?/', redirect: { name: 'signup_internet' } },
+    { path: '/', redirect: { name: 'intro' } },
 ];
 
 const router = new VueRouter({
