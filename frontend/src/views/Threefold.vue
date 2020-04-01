@@ -26,6 +26,26 @@
                     </v-container>
 
                     <v-btn
+                        v-if="userId"
+                        class="btn__next"
+                        elevation="3"
+                        fab
+                        mini
+                        :to="{
+                            name: 'signup_referred',
+                            params: {
+                                userid: userId,
+                                site: this.$route.params.site,
+                            },
+                        }"
+                        color="#1072ba"
+                        dark
+                        ><v-icon class="ml-1"
+                            >fas fa-chevron-right</v-icon
+                        ></v-btn
+                    >
+                    <v-btn
+                        v-else
                         class="btn__next"
                         elevation="3"
                         fab
@@ -43,3 +63,18 @@
         </v-container>
     </div>
 </template>
+<script>
+    import { mapGetters } from 'vuex';
+
+    export default {
+        name: 'threefold',
+        computed: {
+            ...mapGetters(['userId']),
+        },
+        mounted() {
+            if (this.$route.params.userid) {
+                this.setUserId(this.$route.params.userid);
+            }
+        },
+    };
+</script>
