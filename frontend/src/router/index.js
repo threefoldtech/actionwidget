@@ -75,7 +75,7 @@ const routes = [
     },
     {
         path: '/:site?/intro/:userid?',
-        name: 'Intro',
+        name: 'intro',
         meta: {
             title: 'A new Internet for the planet and for humanity.',
         },
