@@ -100,7 +100,7 @@
                         to="signup"
                         color="#1072ba"
                         dark
-                        >next</v-btn
+                        ><v-icon class="ml-1">fas fa-chevron-right</v-icon></v-btn
                     >
                 </v-card>
             </v-row>

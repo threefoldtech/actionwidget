@@ -6,28 +6,30 @@
                     <v-container fluid>
                         <v-row>
                             <v-col cols="12" sm="12">
-                                <v-btn
-                                    :to="{
-                                        name: 'signup_reffered',
-                                        params: { userid: userId },
-                                    }"
-                                    >test</v-btn
-                                >
                                 <p>
                                     Copy following url to invite friends to the
                                     3bot app
                                 </p>
                             </v-col>
-                            <v-col cols="12" sm="6">
+                            <v-col cols="11" sm="11">
                                 <v-text-field
-                                    label="linkske"
+                                    :label="referralUrl"
+                                    disabled
                                     single-line
-                                    append-icon="fas fa-copy"
-                                    >{{ refererToken }}</v-text-field
+                                    >{{ referralUrl }}</v-text-field
                                 >
                             </v-col>
+                            <v-col cols="1" sm="1" class="pt-6">
+                                <v-btn
+                                    icon
+                                    v-if="referralUrl"
+                                    v-clipboard="referralUrl"
+                                >
+                                    <v-icon>fas fa-copy</v-icon>
+                                </v-btn>
+                            </v-col>
                         </v-row>
-                        <v-row>
+                        <v-row v-if="referrals.length">
                             <v-col cols="12" sm="12">
                                 <h2>referred users ({{ referrals.length }})</h2>
                             </v-col>
@@ -36,8 +38,13 @@
                                     :headers="headers"
                                     :items="referrals"
                                     :items-per-page="10"
-                                    class="elevation-1"
+                                    elevation="0"
                                 ></v-data-table>
+                            </v-col>
+                        </v-row>
+                        <v-row v-else>
+                            <v-col cols="12" sm="12">
+                                <h2>No referred users</h2>
                             </v-col>
                         </v-row>
                     </v-container>
@@ -50,6 +57,9 @@
 <script>
     import router from '../router';
     import axios from 'axios';
+    import Vue from 'vue';
+    import Clipboard from 'v-clipboard';
+    Vue.use(Clipboard);
 
     export default {
         name: 'status',
@@ -64,27 +74,32 @@
                 `/api/verify_user/${this.verifyToken}`
             );
 
-            this.refererToken = response.data.data.referrer_token;
-            this.userId = response.data.data.user_id;
-
-            this.referrals = (
-                await axios.get(`/api/referral_done/${this.refererToken}`)
-            ).data.data;
+            this.referrerToken = response.data.data.referrer_token;
+            this.userId = response.data.data.id;
+            const host = window.location.host;
+            const protocol = window.location.protocol;
+            const baseUrl = `${protocol}//${host}`;
+            this.referralUrl = `${baseUrl}/intro/${this.userId}`;
+            const referralResponse = await axios.get(
+                `/api/referral_done/${this.referrerToken}`
+            );
+            this.referrals = JSON.parse(referralResponse.data.data);
         },
         data: function() {
             return {
-                verifyToken: 'sdfsdfsdf',
-                referrals: null,
-                refererToken: null,
+                verifyToken: '',
+                referrals: [],
+                referralUrl: null,
+                referrerToken: null,
                 userId: null,
                 headers: [
                     {
                         text: '3Bot Name',
                         align: 'start',
-                        value: '3BotName',
+                        value: 'referral_3bot_name',
                     },
-                ]
-            }
-        }
-    }
+                ],
+            };
+        },
+    };
 </script>

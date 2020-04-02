@@ -4,9 +4,26 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 const routes = [
-    { path: '/', redirect: { name: 'signup_internet' } },
     {
-        path: '/signup',
+        path: '/:site?/status',
+        name: 'status',
+        meta: {
+            title: 'Status',
+        },
+        component: () =>
+            import(/* webpackChunkName: "status" */ '../views/Status.vue'),
+    },
+    {
+        path: '/:site?/error',
+        name: 'error',
+        meta: {
+            title: 'Error',
+        },
+        component: () =>
+            import(/* webpackChunkName: "error" */ '../views/Error.vue'),
+    },
+    {
+        path: '/:site?/signup',
         name: 'signup',
         meta: {
             title: 'Signup',
@@ -15,7 +32,7 @@ const routes = [
             import(/* webpackChunkName: "signup" */ '../views/Signup.vue'),
     },
     {
-        path: '/signup_step_2',
+        path: '/:site?/signup_step_2',
         name: 'signup_step_2',
         meta: {
             title: 'Signup',
@@ -26,7 +43,7 @@ const routes = [
             ),
     },
     {
-        path: '/callback/:userid',
+        path: '/:site?/callback/:userid',
         name: 'callback',
         meta: {
             title: 'Callback',
@@ -35,7 +52,7 @@ const routes = [
             import(/* webpackChunkName: "callback" */ '../views/Callback.vue'),
     },
     {
-        path: '/signup_internet',
+        path: '/:site?/signup_internet',
         name: 'signup_internet',
         meta: {
             title: 'Signup',
@@ -46,7 +63,7 @@ const routes = [
             ),
     },
     {
-        path: '/signup_cyborg',
+        path: '/:site?/signup_cyborg',
         name: 'signup_cyborg',
         meta: {
             title: 'Signup',
@@ -54,21 +71,41 @@ const routes = [
         component: () =>
             import(
                 /* webpackChunkName: "signup_cyborg" */ '../views/signup/Cyborg.vue'
-                ),
+            ),
     },
     {
-        path: '/intro',
-        name: 'intro',
+        path: '/:site?/intro/:userid?',
+        name: 'Intro',
         meta: {
-            title: 'intro',
+            title: 'A new Internet for the planet and for humanity.',
+        },
+        component: () =>
+            import(/* webpackChunkName: "intro" */ '../views/Intro.vue'),
+    },
+    {
+        path: '/:site?/declaration',
+        name: 'declaration',
+        meta: {
+            title: 'Declaration',
         },
         component: () =>
             import(
-                /* webpackChunkName: "intro" */ '../views/intro.vue'
-                ),
+                /* webpackChunkName: "declaration" */ '../views/Declaration.vue'
+            ),
     },
     {
-        path: '/signup_referred',
+        path: '/:site?/threefold',
+        name: 'threefold',
+        meta: {
+            title: 'Threefold',
+        },
+        component: () =>
+            import(
+                /* webpackChunkName: "threefold" */ '../views/Threefold.vue'
+            ),
+    },
+    {
+        path: '/:site?/signup_referred/:userid',
         name: 'signup_referred',
         meta: {
             title: 'Signup',
@@ -79,7 +116,7 @@ const routes = [
             ),
     },
     {
-        path: '/thankyou',
+        path: '/:site?/thankyou',
         name: 'thankyou',
         meta: {
             title: 'Thank you',
@@ -87,24 +124,7 @@ const routes = [
         component: () =>
             import(/* webpackChunkName: "thankyou" */ '../views/Thankyou.vue'),
     },
-    {
-        path: '/status',
-        name: 'status',
-        meta: {
-            title: 'Status',
-        },
-        component: () =>
-            import(/* webpackChunkName: "status" */ '../views/Status.vue'),
-    },
-    {
-        path: '/error',
-        name: 'error',
-        meta: {
-            title: 'Error',
-        },
-        component: () =>
-            import(/* webpackChunkName: "error" */ '../views/Error.vue'),
-    },
+    { path: '/', redirect: { name: 'intro' } },
 ];
 
 const router = new VueRouter({

@@ -3,12 +3,31 @@
         <v-container class="fill-height" fluid>
             <v-row align="center" justify="center">
                 <v-card class="mt-5 py-6 mx-auto" max-width="800" tile>
+                    <Progress step="4"/>
                     <v-form
                         class="ma-5"
                         lazy-validation
                         ref="form"
                         v-model="valid"
                     >
+
+                         <v-text-field
+                            v-model="signupEmail"
+                            :rules="emailRules"
+                            label="E-mail"
+                            required
+                            validate-on-blur
+                            :disabled="!!email"
+                        ></v-text-field>
+                        <v-text-field
+                            v-model="mobile"
+                            :rules="mobileRules"
+                            validate-on-blur
+                            label="Mobile"
+                            type="tel"
+                            hint="optional"
+                            persistent-hint
+                        ></v-text-field>
                         <v-checkbox
                             v-model="reserve_3bot"
                             label="I want to reserve my digital twin"
@@ -29,7 +48,7 @@
                             v-model="deploy_it"
                             label="I am interested to know more about how to deploy my own IT solutions on this new internet (maybe not)"
                         />
-                        <span>I agree that</span>
+                        <h3>I agree that</h3>
                         <v-checkbox
                             v-model="gdpr"
                             label="GDPR "
@@ -45,32 +64,18 @@
                             label="We are allowed to email them"
                             :rules="[v => !!v || 'You must agree to continue!']"
                         />
-                        <v-text-field
-                            v-model="signupEmail"
-                            :rules="emailRules"
-                            label="E-mail"
-                            required
-                            :disabled="!!email"
-                        ></v-text-field>
-                        <v-text-field
-                            v-model="mobile"
-                            :rules="mobileRules"
-                            label="Mobile"
-                            type="tel"
-                            hint="optional"
-                            persistent-hint
-                        ></v-text-field>
+
                         <v-btn
                             :disabled="!valid"
                             elevation="3"
                             fab
                             mini
                             color="#1072ba"
-                            dark
-                            class="btn__next"
+                            class="btn__next white--text"
+                            :loading="loading"
                             @click="validateAndSubmit"
                         >
-                            Next
+                            <v-icon class="ml-1">fas fa-chevron-right</v-icon>
                         </v-btn>
                     </v-form>
                 </v-card>
@@ -112,6 +117,7 @@
             canSendEmail: false,
             gdpr: false,
             cookies: false,
+            loading: false,
         }),
         computed: {
             ...mapGetters(['email', 'referrerToken']),
@@ -129,6 +135,9 @@
                 }
 
                 const email = this.email || this.signupEmail;
+                this.loading = true;
+
+                const host3botName = this.$route.params.site || '';
 
                 const response = await axios.put(`/api/user`, {
                     mobile: this.mobile,
@@ -141,6 +150,7 @@
                     cookies: this.cookies,
                     email_address: email,
                     email: this.canSendEmail,
+                    host_3bot_name: host3botName,
                 });
                 if (!response.data.success) {
                     await router.push('error');
