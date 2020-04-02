@@ -6,10 +6,14 @@ from validate_email import validate_email
 import send_email
 import email_referrer
 import email_referred
+import email_reserve_name
 import uuid
 import db
 import json
 import responses
+from urllib.request import urlopen
+import config
+import nacl
 
 from db.user import User
 from db.referrals_done_user import ReferralsDoneUser
@@ -95,7 +99,8 @@ def set_referral_and_currency():
     referrer_token = content['user_referrer_token']
     referral = content['referral'] == 1
     currencies = content['currencies'] == 1
-    
+    threebot_connect = content['threebot_connect'] == 1
+
     user = User.get_by_referrer_token(referrer_token)
     if user is None:
         return responses.errorObj(404, "User does not exists")
@@ -115,6 +120,10 @@ def set_referral_and_currency():
     if currencies:
         # send email currencies
         print("not implemented")
+    if not threebot_connect and user.reserve_3bot:
+        msg = email_reserve_name.get_email_reserve_name_text()
+        send_email.send_email(user.email_address,
+                email_reserve_name.get_email_reserve_name_subject(), msg)
 
     return responses.successObj(200, { "referral" : referral, "currencies": currencies})
 
@@ -130,6 +139,8 @@ def update_referral():
     if user is None:
         return responses.errorObj(404, "User not found")
     
+    if is_3bot_user(content):
+        return responses.errorObj(404, "3bot login data invalid")
     #if users exists, add referral => TODO check POI
     if ReferralsDoneUser.check_already_referred_3bot_name(referral_3bot_name):
         return responses.successObj(200,referral_3bot_name) # the user installed 3bot connect so this is ok
@@ -138,6 +149,21 @@ def update_referral():
     referral_done.add()
 
     return responses.successObj(200,referral_3bot_name)
+
+
+def is_3bot_user(body_data):
+    auth_response = urlopen("https://{}/api/users/{}".format(config.THREE_BOT_CONNECT_URL, body_data['referral_3bot_name']))
+    data = json.loads(auth_response.read())
+    user_public = data['publicKey']
+
+    verify_key = nacl.signing.VerifyKey(user_public, encoder=nacl.encoding.Base64Encoder)
+
+    try:
+        verify_key.verify(base64.b64decode(body_data['signedHash']))
+    except:
+        return False
+    return True
+
 
 @app.route('/api/referral_done/<user_referrer_token>',  methods=['GET'])
 def get_referrals_done(user_referrer_token):
