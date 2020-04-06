@@ -8,7 +8,7 @@
                 width="800"
                 tile
             >
-                <p class="ma-4 text-center">On behalf of the planet and humanity we <b>THANK YOU</b>for empowering a better Internet. We’ll be in touch.  </p>
+                <p class="ma-4 text-center">On behalf of the planet and humanity we <b>THANK YOU</b> for empowering a better Internet. We’ll be in touch.  </p>
             </v-card>
         </v-row>
         <v-row align="center" justify="center"></v-row>
