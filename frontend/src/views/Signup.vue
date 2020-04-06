@@ -32,6 +32,14 @@
                             v-model="ITSolutions"
                             label="I want to learn more about how I can deploy my own IT solutions on this new internet"
                         />
+                        <v-text-field
+                            v-model="userName"
+                            validate-on-blur
+                            label="Your name"
+                            :rules="userNameRules"
+                            required
+                            persistent-hint
+                        ></v-text-field>
                          <v-text-field
                             v-model="email"
                             :rules="emailRules"
@@ -39,14 +47,7 @@
                             required
                             validate-on-blur
                         ></v-text-field>
-                        <v-text-field
-                            v-model="userName"
-                            validate-on-blur
-                            label="Name"
-                            :rules="userNameRules"
-                            required
-                            persistent-hint
-                        ></v-text-field>
+
                         <v-checkbox
                             v-model="canSendEmail"
                             label="I agree to being kept informed about this new Internet by email. (Your data is safe with us, see our privacy policy here)"
