@@ -49,6 +49,19 @@ class User:
             return cls(entry[0],entry[1],entry[2],entry[3],entry[4],entry[5])
     
     @classmethod
+    def check_double_name_taken(cls, double_name):
+        con = get_db()
+        cursor = con.cursor()
+        with con:
+            cursor.execute("SELECT * FROM users where double_name=?", [double_name])
+            entry = cursor.fetchone()
+            print(entry)
+            if entry is None:
+                return False
+            return True
+   
+
+    @classmethod
     def get_by_email_address(cls, email_address):
         print(cls)
         con = get_db()
