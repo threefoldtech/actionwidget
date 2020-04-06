@@ -26,7 +26,7 @@
                         ></v-text-field>
                         <v-checkbox
                             v-model="internetCapacity"
-                            label="I want to learn more about how i can provide Internet capacity to people around me"
+                            label="I want to learn more about how I can provide Internet capacity to people around me"
                         />
                         <v-checkbox
                             v-model="ITSolutions"
@@ -66,7 +66,7 @@
                         >
                             <v-icon class="ml-1">fas fa-chevron-right</v-icon>
                         </v-btn>
-                                                               <v-btn
+                        <v-btn
                         class="btn__previous"
                         elevation="2"
                         fab
@@ -102,7 +102,9 @@
             ],
             userNameRules: [
                 v => v.length <= 40 || 'Name must be less than 40 characters',
-                v => /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/.test(v) || 'Name must be valid',
+                v => /^[a-zA-Z0-9]+$/.test(v) || 'Please use alphanumerics charachters only (0-9 and a-z)',
+
+                //v => /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/.test(v) || 'Name must be valid',
             ],
             userName: '',
             threeBotName: '',
@@ -122,7 +124,7 @@
                 const response = await axios.put(`/api/user`, {
                     email_address: this.email,
                     name: this.userName,
-                    double_name: this.threeBotName,
+                    double_name: (this.reserve_3bot === true) ? this.threeBotName : '' ,
                     internet_capacity: this.internetCapacity,
                     deploy_solutions: this.ITSolutions,
                 });
