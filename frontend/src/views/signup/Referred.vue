@@ -3,7 +3,7 @@
         <v-container class="fill-height" fluid>
             <v-row align="center" justify="center">
                 <v-card class="mt-5 py-6 mx-auto" width="800" tile>
-                    <Progress step="4"/>
+                    <Progress step="4" />
                     <v-container fluid>
                         <v-row>
                             <v-col cols="12" sm="12">
@@ -46,9 +46,7 @@
                             <v-col cols="12" sm="6">
                                 <v-checkbox
                                     v-model="installed"
-                                    :label="
-                                        `I've installed the 3Bot connect app`
-                                    "
+                                    :label="`I've installed the 3Bot connect app`"
                                 ></v-checkbox>
                             </v-col>
                         </v-row>

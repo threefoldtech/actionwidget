@@ -85,7 +85,7 @@
             );
             this.referrals = JSON.parse(referralResponse.data.data);
         },
-        data: function() {
+        data: function () {
             return {
                 verifyToken: '',
                 referrals: [],

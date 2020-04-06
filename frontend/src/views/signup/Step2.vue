@@ -3,7 +3,7 @@
         <v-container class="fill-height" fluid>
             <v-row align="center" justify="center">
                 <v-card class="mt-5 py-6 mx-auto" max-width="800" tile>
-                    <Progress step="5"/>
+                    <Progress step="5" />
                     <v-form
                         class="ma-5"
                         lazy-validation
@@ -56,7 +56,7 @@
                 if (!this.$refs.form.validate()) {
                     return;
                 }
-                this.loading= true;
+                this.loading = true;
                 await axios.post(`/api/set_referral_and_currency`, {
                     user_referrer_token: this.referrerToken,
                     referral: this.referral,
@@ -67,7 +67,12 @@
             },
         },
         data() {
-            return { valid: true, referral: false, currencies: false, loading: false };
+            return {
+                valid: true,
+                referral: false,
+                currencies: false,
+                loading: false,
+            };
         },
     };
 </script>

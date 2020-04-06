@@ -143,7 +143,6 @@
             );
 
             if (!seiVerified || seiVerified.status !== 200) {
-
                 return;
             }
             // @todo: error handling
