@@ -13,7 +13,10 @@ def init():
     sql_user_entries = """ CREATE TABLE IF NOT EXISTS users (
                                     id INTEGER PRIMARY KEY,
                                     email_address text NOT NULL,
-                                    name text NOT NULL
+                                    name text NOT NULL,
+                                    double_name text NULL,
+                                    internet_capacity integer NOT NULL,
+                                    deploy_solutions integer NOT NULL
                                 ); """
 
 
