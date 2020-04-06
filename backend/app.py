@@ -23,12 +23,17 @@ def put_user():
     content = request.get_json()
 
     email_address = content['email_address']
+    internet_capacity = content['internet_capacity'] == 1
+    deploy_solutions = content['deploy_solutions'] == 1
     # check if email is valid, if user is not  in referral program already
     if not validate_email(email_address):
         return responses.errorObj(400, "email_address invalid")
     name = content['name']
-
-    user = User(0, email_address,name)
+    
+    double_name = None
+    if 'double_name' in content:
+        double_name = content['double_name']
+    user = User(0, email_address, name, double_name, internet_capacity, deploy_solutions)
     user.add()
 
     return responses.successObj(200, user)
