@@ -33,6 +33,10 @@ def put_user():
     double_name = None
     if 'double_name' in content:
         double_name = content['double_name']
+        print("checkign taken", double_name)
+        if User.check_double_name_taken(double_name):
+            return responses.errorObj(409, "double_name is taken")
+
     user = User(0, email_address, name, double_name, internet_capacity, deploy_solutions)
     user.add()
 
