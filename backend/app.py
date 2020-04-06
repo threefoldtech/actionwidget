@@ -16,8 +16,9 @@ import logging
 from db.user import User
 
 from db.object_encoder import ObjectEncoder
+
 app = Flask(__name__)
-logging.info("hierboven")
+db.init()
 
 @app.route('/api/user',  methods=['PUT'])
 def put_user():
@@ -55,6 +56,4 @@ def get_users():
 
 
 if __name__ == '__main__':
-    logging.info("*******************running main")
-    db.init()
     app.run(debug=True)
