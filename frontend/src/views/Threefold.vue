@@ -3,7 +3,7 @@
         <v-container class="fill-height" fluid>
             <v-row align="center" justify="center">
                 <v-card class="mt-5 py-6 mx-auto" max-width="800" tile>
-                    <Progress step="3" />
+                    <Progress step="2" />
                     <v-container fluid>
                         <v-row>
                             <v-col cols="12" sm="12">
@@ -23,8 +23,34 @@
                                 </ul>
                             </v-col>
                         </v-row>
+                        <v-row >
+                            <v-col cols="12" sm="12">
+                                    <h3>Visit us</h3>
+                            </v-col>
+                            <v-col cols="12" sm="6">
+                                    <a :href="'https://threefold.io'" target="_blank">
+                                        <v-col cols="12" sm="6">
+                                                <v-img src="../assets/logo.png" height="45" width="150"></v-img> 
+                                        </v-col>
+                                    </a> 
+                            </v-col>
+                            <v-col cols="12" sm="6" class="mt-4">
+                                    <a :href="'https://forum.threefold.io/'" target="_blank"><h4>Threefold forums</h4></a>
+                            </v-col>                            
+                        </v-row>
                     </v-container>
-
+                    <v-btn
+                        class="btn__previous"
+                        elevation="3"
+                        fab
+                        mini
+                        to="intro"
+                        color="#1072ba"
+                        dark
+                        ><v-icon class="m-1"
+                            >fas fa-chevron-left</v-icon
+                        ></v-btn
+                    >
                     <v-btn
                         v-if="userId"
                         class="btn__next"

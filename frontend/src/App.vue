@@ -7,7 +7,9 @@
 
         <v-app-bar app color="white">
             <div class="d-flex align-center">
-                <v-img src="./assets/logo.png" height="45" width="200"></v-img>
+                <a :href="'https://threefold.io'" target="_blank">
+                    <v-img src="./assets/logo.png" height="45" width="200"></v-img>
+                </a>
             </div>
         </v-app-bar>
         <v-content>

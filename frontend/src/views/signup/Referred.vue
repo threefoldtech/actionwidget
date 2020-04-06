@@ -3,7 +3,7 @@
         <v-container class="fill-height" fluid>
             <v-row align="center" justify="center">
                 <v-card class="mt-5 py-6 mx-auto" width="800" tile>
-                    <Progress step="4"/>
+                    <Progress step="3"/>
                     <v-container fluid>
                         <v-row>
                             <v-col cols="12" sm="12">

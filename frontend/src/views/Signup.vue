@@ -3,7 +3,7 @@
         <v-container class="fill-height" fluid>
             <v-row align="center" justify="center">
                 <v-card class="mt-5 py-6 mx-auto" max-width="800" tile>
-                    <Progress step="4"/>
+                    <Progress step="3"/>
                     <v-form
                         class="ma-5"
                         lazy-validation
@@ -28,38 +28,38 @@
                             hint="optional"
                             persistent-hint
                         ></v-text-field>
-                        <v-checkbox
+                        <v-checkbox class="ma-0 mt-2"
                             v-model="reserve_3bot"
                             label="I want to reserve my digital twin"
                         />
-                        <v-checkbox
+                        <v-checkbox class="ma-0"
                             v-model="videoconf"
                             label="I am interested to have my own video conferencing solution which allows me to communicate with everyone in the world"
                         />
-                        <v-checkbox
+                        <v-checkbox class="ma-0"
                             v-model="social_media"
                             label="I am interested in a peer2peer alternative social media network for private & business usage"
                         />
-                        <v-checkbox
+                        <v-checkbox class="ma-0"
                             v-model="farmer"
                             label="I am interested to learn more about become a farmer and provide internet capacity for people around me"
                         />
-                        <v-checkbox
+                        <v-checkbox class="ma-0"
                             v-model="deploy_it"
                             label="I am interested to know more about how to deploy my own IT solutions on this new internet (maybe not)"
                         />
                         <h3>I agree that</h3>
-                        <v-checkbox
+                        <v-checkbox class="ma-0 mt-2"
                             v-model="gdpr"
                             label="GDPR "
                             :rules="[v => !!v || 'You must agree to continue!']"
                         />
-                        <v-checkbox
+                        <v-checkbox class="ma-0"
                             v-model="cookies"
                             label="We are allowed to put cookies from our websites"
                             :rules="[v => !!v || 'You must agree to continue!']"
                         />
-                        <v-checkbox
+                        <v-checkbox class="ma-0"
                             v-model="canSendEmail"
                             label="We are allowed to email them"
                             :rules="[v => !!v || 'You must agree to continue!']"

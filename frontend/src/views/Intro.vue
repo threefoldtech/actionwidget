@@ -59,7 +59,7 @@
                         fab
                         mini
                         :to="{
-                            name: 'declaration',
+                            name: 'threefold',
                             params: { ...this.$route.params },
                         }"
                         color="#1072ba"
