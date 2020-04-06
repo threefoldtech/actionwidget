@@ -16,7 +16,7 @@ from db.user import User
 
 from db.object_encoder import ObjectEncoder
 app = Flask(__name__)
-
+print("hierboven")
 
 @app.route('/api/user',  methods=['PUT'])
 def put_user():
