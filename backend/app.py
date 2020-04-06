@@ -11,12 +11,13 @@ import responses
 from urllib.request import urlopen
 from mount import config
 import nacl
+import logging
 
 from db.user import User
 
 from db.object_encoder import ObjectEncoder
 app = Flask(__name__)
-print("hierboven")
+logging.info("hierboven")
 
 @app.route('/api/user',  methods=['PUT'])
 def put_user():
@@ -54,6 +55,6 @@ def get_users():
 
 
 if __name__ == '__main__':
-    print("running main")
+    logging.info("*******************running main")
     db.init()
     app.run(debug=True)

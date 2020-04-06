@@ -142,4 +142,4 @@ cython_debug/
 media
 static
 calltoaction.db
-mount/config.dev.py
+mount/config.py
