@@ -103,7 +103,7 @@
                 v => !!v || 'Your name is required',
                 v => v.length <= 40 || 'Name must be less than 40 characters',
                 v =>
-                    /^[a-zA-Z0-9]+$/.test(v) ||
+                    /^[a-zA-Z0-9 ]+$/.test(v) ||
                     'Please use alphanumerics charachters only (0-9 and a-z)',
 
                 //v => /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/.test(v) || 'Name must be valid',
