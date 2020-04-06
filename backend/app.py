@@ -9,7 +9,7 @@ import db
 import json
 import responses
 from urllib.request import urlopen
-import config
+from mount import config
 import nacl
 
 from db.user import User

@@ -1,8 +1,10 @@
 import sqlite3
 import db
 
+db_file = 'mount/calltoaction.db'
+
 def get_db():
-    db_api = sqlite3.connect('calltoaction.db')
+    db_api = sqlite3.connect(db_file)
     
     return db_api
 
@@ -22,7 +24,7 @@ def init():
 
 
     try:
-        c = sqlite3.connect('calltoaction.db')
+        c = sqlite3.connect(db_file)
         c.execute(sql_user_entries)
         c.commit()
         print("db initialized")
