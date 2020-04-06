@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import signupForm from './signupForm';
 
 Vue.use(Vuex);
 
@@ -25,5 +26,5 @@ export default new Vuex.Store({
         userId: state => state.userId,
         referrerToken: state => state.referrerToken,
     },
-    modules: {},
+    modules: { signupForm },
 });

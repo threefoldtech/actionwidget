@@ -3,7 +3,7 @@
         <v-container class="fill-height" fluid>
             <v-row align="center" justify="center">
                 <v-card class="mt-5 py-6 mx-auto" max-width="800" tile>
-                    <Progress step="3"/>
+                    <Progress step="3" />
                     <v-form
                         class="ma-5"
                         lazy-validation
@@ -40,8 +40,8 @@
                             required
                             persistent-hint
                         ></v-text-field>
-                         <v-text-field
-                            v-model="email"
+                        <v-text-field
+                            v-model="signupEmail"
                             :rules="emailRules"
                             label="E-mail"
                             required
@@ -67,17 +67,15 @@
                             <v-icon class="ml-1">fas fa-chevron-right</v-icon>
                         </v-btn>
                         <v-btn
-                        class="btn__previous"
-                        elevation="2"
-                        fab
-                        mini
-                        to="acknowledgements"
-                        color="#1072ba"
-                        dark
-                        ><v-icon
-                            >fas fa-chevron-left</v-icon
-                        ></v-btn
-                    >
+                            class="btn__previous"
+                            elevation="2"
+                            fab
+                            mini
+                            to="acknowledgements"
+                            color="#1072ba"
+                            dark
+                            ><v-icon>fas fa-chevron-left</v-icon></v-btn
+                        >
                     </v-form>
                 </v-card>
             </v-row>
@@ -91,29 +89,84 @@
     export default {
         data: () => ({
             valid: true,
-            email: '',
             emailRules: [
                 v => !!v || 'E-mail is required',
                 v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
             ],
             threeBotNameRules: [
                 v => v.length <= 20 || 'Name must be less than 20 characters',
-                v => /^[a-zA-Z0-9]+$/.test(v) || 'Please use alphanumerics charachters only (0-9 and a-z)',
+                v =>
+                    /^[a-zA-Z0-9]+$/.test(v) ||
+                    'Please use alphanumerics charachters only (0-9 and a-z)',
             ],
             userNameRules: [
                 v => v.length <= 40 || 'Name must be less than 40 characters',
-                v => /^[a-zA-Z0-9]+$/.test(v) || 'Please use alphanumerics charachters only (0-9 and a-z)',
+                v =>
+                    /^[a-zA-Z0-9]+$/.test(v) ||
+                    'Please use alphanumerics charachters only (0-9 and a-z)',
 
                 //v => /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/.test(v) || 'Name must be valid',
             ],
-            userName: '',
-            threeBotName: '',
-            reserve_3bot: false,
-            ITSolutions: false,
-            internetCapacity: false,
-            canSendEmail: false,
             loading: false,
         }),
+        computed: {
+            signupEmail: {
+                get() {
+                    return this.$store.state.signupForm.signupEmail;
+                },
+                set(value) {
+                    this.$store.commit('updateSignupEmail', value);
+                },
+            },
+            userName: {
+                get() {
+                    return this.$store.state.signupForm.userName;
+                },
+                set(value) {
+                    this.$store.commit('updateUserName', value);
+                },
+            },
+            threeBotName: {
+                get() {
+                    return this.$store.state.signupForm.threeBotName;
+                },
+                set(value) {
+                    this.$store.commit('updateThreeBotName', value);
+                },
+            },
+            reserve_3bot: {
+                get() {
+                    return this.$store.state.signupForm.reserve_3bot;
+                },
+                set(value) {
+                    this.$store.commit('updateReserve3bot', value);
+                },
+            },
+            ITSolutions: {
+                get() {
+                    return this.$store.state.signupForm.ITSolutions;
+                },
+                set(value) {
+                    this.$store.commit('updateITSolutions', value);
+                },
+            },
+            internetCapacity: {
+                get() {
+                    return this.$store.state.signupForm.internetCapacity;
+                },
+                set(value) {
+                    this.$store.commit('updateInternetCapacity', value);
+                },
+            },
+            canSendEmail: {
+                get() {
+                    return this.$store.state.signupForm.canSendEmail;
+                },
+                set(value) {
+                    this.$store.commit('updateCanSendEmail', value);
+                },
+            },
+        },
         methods: {
             async validateAndSubmit() {
                 if (!this.$refs.form.validate()) {
@@ -122,9 +175,10 @@
                 this.loading = true;
 
                 const response = await axios.put(`/api/user`, {
-                    email_address: this.email,
+                    email_address: this.signupEmail,
                     name: this.userName,
-                    double_name: (this.reserve_3bot === true) ? this.threeBotName : '' ,
+                    double_name:
+                        this.reserve_3bot === true ? this.threeBotName : '',
                     internet_capacity: this.internetCapacity,
                     deploy_solutions: this.ITSolutions,
                 });
