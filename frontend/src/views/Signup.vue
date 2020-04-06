@@ -3,65 +3,53 @@
         <v-container class="fill-height" fluid>
             <v-row align="center" justify="center">
                 <v-card class="mt-5 py-6 mx-auto" max-width="800" tile>
-                    <Progress step="4"/>
+                    <Progress step="3"/>
                     <v-form
                         class="ma-5"
                         lazy-validation
                         ref="form"
                         v-model="valid"
                     >
-
+                        <v-checkbox
+                            v-model="reserve_3bot"
+                            label="Reserve my digital twin name (unique new internet ID)"
+                        />
+                        <v-text-field
+                            v-if="reserve_3bot"
+                            v-model="threeBotName"
+                            validate-on-blur
+                            :rules="threeBotNameRules"
+                            suffix=".3bot"
+                            label="3Bot Name"
+                            required
+                            persistent-hint
+                        ></v-text-field>
+                        <v-checkbox
+                            v-model="internetCapacity"
+                            label="I want to learn more about how i can provide Internet capacity to people around me"
+                        />
+                        <v-checkbox
+                            v-model="ITSolutions"
+                            label="I want to learn more about how I can deploy my own IT solutions on this new internet"
+                        />
                          <v-text-field
-                            v-model="signupEmail"
+                            v-model="email"
                             :rules="emailRules"
                             label="E-mail"
                             required
                             validate-on-blur
-                            :disabled="!!email"
                         ></v-text-field>
                         <v-text-field
-                            v-model="mobile"
-                            :rules="mobileRules"
+                            v-model="userName"
                             validate-on-blur
-                            label="Mobile"
-                            type="tel"
-                            hint="optional"
+                            label="Name"
+                            :rules="userNameRules"
+                            required
                             persistent-hint
                         ></v-text-field>
                         <v-checkbox
-                            v-model="reserve_3bot"
-                            label="I want to reserve my digital twin"
-                        />
-                        <v-checkbox
-                            v-model="videoconf"
-                            label="I am interested to have my own video conferencing solution which allows me to communicate with everyone in the world"
-                        />
-                        <v-checkbox
-                            v-model="social_media"
-                            label="I am interested in a peer2peer alternative social media network for private & business usage"
-                        />
-                        <v-checkbox
-                            v-model="farmer"
-                            label="I am interested to learn more about become a farmer and provide internet capacity for people around me"
-                        />
-                        <v-checkbox
-                            v-model="deploy_it"
-                            label="I am interested to know more about how to deploy my own IT solutions on this new internet (maybe not)"
-                        />
-                        <h3>I agree that</h3>
-                        <v-checkbox
-                            v-model="gdpr"
-                            label="GDPR "
-                            :rules="[v => !!v || 'You must agree to continue!']"
-                        />
-                        <v-checkbox
-                            v-model="cookies"
-                            label="We are allowed to put cookies from our websites"
-                            :rules="[v => !!v || 'You must agree to continue!']"
-                        />
-                        <v-checkbox
                             v-model="canSendEmail"
-                            label="We are allowed to email them"
+                            label="I agree to being kept informed about this new Internet by email. (Your data is safe with us, see our privacy policy here)"
                             :rules="[v => !!v || 'You must agree to continue!']"
                         />
 
@@ -77,6 +65,18 @@
                         >
                             <v-icon class="ml-1">fas fa-chevron-right</v-icon>
                         </v-btn>
+                                                               <v-btn
+                        class="btn__previous"
+                        elevation="2"
+                        fab
+                        mini
+                        to="acknowledgements"
+                        color="#1072ba"
+                        dark
+                        ><v-icon
+                            >fas fa-chevron-left</v-icon
+                        ></v-btn
+                    >
                     </v-form>
                 </v-card>
             </v-row>
@@ -86,81 +86,50 @@
 <script>
     import router from '../router';
     import axios from 'axios';
-    import { mapGetters, mapMutations } from 'vuex';
 
     export default {
         data: () => ({
             valid: true,
-            signupEmail: '',
+            email: '',
             emailRules: [
                 v => !!v || 'E-mail is required',
                 v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
             ],
-            mobile: '',
-            mobileRules: [
-                v => {
-                    if (!v) {
-                        return true;
-                    }
-                    return (
-                        /^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$/.test(
-                            v
-                        ) || 'Mobile nr must be valid'
-                    );
-                },
+            threeBotNameRules: [
+                v => v.length <= 20 || 'Name must be less than 20 characters',
+                v => /^[a-zA-Z0-9]+$/.test(v) || 'Please use alphanumerics charachters only (0-9 and a-z)',
             ],
+            userNameRules: [
+                v => v.length <= 40 || 'Name must be less than 40 characters',
+                v => /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/.test(v) || 'Name must be valid',
+            ],
+            userName: '',
+            threeBotName: '',
             reserve_3bot: false,
-            videoconf: false,
-            social_media: false,
-            farmer: false,
-            deploy_it: false,
+            ITSolutions: false,
+            internetCapacity: false,
             canSendEmail: false,
-            gdpr: false,
-            cookies: false,
             loading: false,
         }),
-        computed: {
-            ...mapGetters(['email', 'referrerToken']),
-        },
-        mounted() {
-            if (this.email) {
-                this.signupEmail = this.email;
-            }
-        },
         methods: {
-            ...mapMutations(['setReferrerToken']),
             async validateAndSubmit() {
                 if (!this.$refs.form.validate()) {
                     return;
                 }
-
-                const email = this.email || this.signupEmail;
                 this.loading = true;
 
-                const host3botName = this.$route.params.site || '';
-
                 const response = await axios.put(`/api/user`, {
-                    mobile: this.mobile,
-                    reserve_3bot: this.reserve_3bot,
-                    videoconf: this.videoconf,
-                    social_media: this.social_media,
-                    farmer: this.farmer,
-                    deploy_it: this.deploy_it,
-                    gdpr: this.gdpr,
-                    cookies: this.cookies,
-                    email_address: email,
-                    email: this.canSendEmail,
-                    host_3bot_name: host3botName,
+                    email_address: this.email,
+                    name: this.userName,
+                    double_name: this.threeBotName,
+                    internet_capacity: this.internetCapacity,
+                    deploy_solutions: this.ITSolutions,
                 });
                 if (!response.data.success) {
                     await router.push('error');
                     return;
                 }
-
-                const referrerToken = response.data.data.user_referrer_token;
-
-                this.setReferrerToken(referrerToken);
-                await router.push('signup_step_2');
+                await router.push('thankyou');
             },
         },
     };

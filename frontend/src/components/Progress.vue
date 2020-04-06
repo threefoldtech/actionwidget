@@ -2,20 +2,16 @@
     <div class="progress">
         <v-stepper class="ma-0" :elevation="0" :value="step">
             <v-stepper-header>
-                <v-stepper-step step="1">Intro</v-stepper-step>
-
-                <v-divider></v-divider>
-                <v-stepper-step step="2">Declaration</v-stepper-step>
-
+                <v-stepper-step step="1">Introduction</v-stepper-step>
                 <v-divider></v-divider>
 
-                <v-stepper-step step="3">Threefold</v-stepper-step>
+                <v-stepper-step step="2">Acknowledgements</v-stepper-step>
                 <v-divider></v-divider>
 
-                <v-stepper-step step="4">Sign up</v-stepper-step>
+                <v-stepper-step step="3">Sign up</v-stepper-step>
                 <v-divider></v-divider>
 
-                <v-stepper-step step="5">Referral</v-stepper-step>
+                <v-stepper-step step="4">Thank you</v-stepper-step>
             </v-stepper-header>
         </v-stepper>
     </div>
