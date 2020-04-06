@@ -50,10 +50,10 @@
 
                         <v-checkbox
                             v-model="canSendEmail"
-                            label="I agree to being kept informed about this new Internet by email. (Your data is safe with us, see our privacy policy here)"
+                            label="I agree to being kept informed about this new Internet by email."
                             :rules="[v => !!v || 'You must agree to continue!']"
                         />
-
+                        <p> ( Your data is safe with us, see our privacy policy <a href="https://docs.google.com/document/d/16i6M2Bkxh0o5kbDOuBCnErPJ_OKM1uLkgPWJwexZ9lQ/edit?usp=sharing" target="_blank">here</a> )</p>
                         <v-btn
                             :disabled="!valid"
                             elevation="3"
@@ -100,6 +100,7 @@
                     'Please use alphanumerics charachters only (0-9 and a-z)',
             ],
             userNameRules: [
+                v => !!v || 'Your name is required',
                 v => v.length <= 40 || 'Name must be less than 40 characters',
                 v =>
                     /^[a-zA-Z0-9]+$/.test(v) ||

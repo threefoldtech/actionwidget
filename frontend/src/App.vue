@@ -19,7 +19,7 @@
         <v-content>
             <div id="app" class="back">
                 <h1 class="text-center mr-6 pt-6">
-                    {{ $route.meta.title || $route.name || 'Referrer' }}
+                    {{ $route.meta.title || $route.name}}
                 </h1>
                 <router-view></router-view>
             </div>
