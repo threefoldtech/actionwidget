@@ -5,15 +5,6 @@ Vue.use(VueRouter);
 
 const routes = [
     {
-        path: '/:site?/status',
-        name: 'status',
-        meta: {
-            title: 'Status',
-        },
-        component: () =>
-            import(/* webpackChunkName: "status" */ '../views/Status.vue'),
-    },
-    {
         path: '/:site?/error',
         name: 'error',
         meta: {
@@ -26,21 +17,10 @@ const routes = [
         path: '/:site?/signup',
         name: 'signup',
         meta: {
-            title: 'Signup',
+            title: 'Digital Twin Sign-up',
         },
         component: () =>
             import(/* webpackChunkName: "signup" */ '../views/Signup.vue'),
-    },
-    {
-        path: '/:site?/signup_step_2',
-        name: 'signup_step_2',
-        meta: {
-            title: 'Signup',
-        },
-        component: () =>
-            import(
-                /* webpackChunkName: "signup_step_2" */ '../views/signup/Step2.vue'
-            ),
     },
     {
         path: '/:site?/callback/:userid',
@@ -52,28 +32,6 @@ const routes = [
             import(/* webpackChunkName: "callback" */ '../views/Callback.vue'),
     },
     {
-        path: '/:site?/signup_internet',
-        name: 'signup_internet',
-        meta: {
-            title: 'Signup',
-        },
-        component: () =>
-            import(
-                /* webpackChunkName: "signup_internet" */ '../views/signup/Internet.vue'
-            ),
-    },
-    {
-        path: '/:site?/signup_cyborg',
-        name: 'signup_cyborg',
-        meta: {
-            title: 'Signup',
-        },
-        component: () =>
-            import(
-                /* webpackChunkName: "signup_cyborg" */ '../views/signup/Cyborg.vue'
-            ),
-    },
-    {
         path: '/:site?/intro/:userid?',
         name: 'intro',
         meta: {
@@ -83,14 +41,14 @@ const routes = [
             import(/* webpackChunkName: "intro" */ '../views/Intro.vue'),
     },
     {
-        path: '/:site?/declaration',
-        name: 'declaration',
+        path: '/:site?/acknowledgements',
+        name: 'acknowledgements',
         meta: {
-            title: 'Declaration',
+            title: 'Acknowledgements',
         },
         component: () =>
             import(
-                /* webpackChunkName: "declaration" */ '../views/Declaration.vue'
+                /* webpackChunkName: "declaration" */ '../views/Acknowledgements.vue'
             ),
     },
     {
@@ -102,17 +60,6 @@ const routes = [
         component: () =>
             import(
                 /* webpackChunkName: "threefold" */ '../views/Threefold.vue'
-            ),
-    },
-    {
-        path: '/:site?/signup_referred/:userid',
-        name: 'signup_referred',
-        meta: {
-            title: 'Signup',
-        },
-        component: () =>
-            import(
-                /* webpackChunkName: "signup_referred" */ '../views/signup/Referred.vue'
             ),
     },
     {
