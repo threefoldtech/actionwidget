@@ -19,7 +19,6 @@
                             v-model="threeBotName"
                             validate-on-blur
                             :rules="threeBotNameRules"
-                            suffix=".3bot"
                             label="Double name"
                             required
                             persistent-hint
