@@ -7,11 +7,11 @@
 
                     <v-row align="center" justify="center" class="ma-4">
                         <v-img
-                            src="../assets/Destktop_landing.png"
+                            src="../assets/Desktop_Landing.png"
                             aspect-ratio="1"
                             class="grey lighten-2"
                             max-width="800"
-                            max-height="800"
+                            max-height="600"
                         >
                             <template v-slot:placeholder>
                                 <v-row
