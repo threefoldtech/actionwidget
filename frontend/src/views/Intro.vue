@@ -7,7 +7,7 @@
 
                     <v-row align="center" justify="center" class="ma-4">
                         <v-img
-                            src="../assets/freeInternet.png"
+                            src="../assets/Destktop_landing.png"
                             aspect-ratio="1"
                             class="grey lighten-2"
                             max-width="800"
