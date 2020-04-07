@@ -9,8 +9,15 @@
                         <v-img
                             src="../assets/Desktop_Landing.png"
                             aspect-ratio="1"
-                            class="grey lighten-2"
+                            class="grey lighten-2 hidden-sm-and-down"
                             max-width="800"
+                            max-height="600"
+                        ></v-img>
+                        <v-img
+                            src="../assets/Mobile_Landing.png"
+                            aspect-ratio="1"
+                            class="grey lighten-2 hidden-lg-and-up"
+                            max-width="600"
                             max-height="600"
                         >
                             <template v-slot:placeholder>
