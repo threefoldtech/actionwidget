@@ -94,10 +94,11 @@
                 v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
             ],
             threeBotNameRules: [
-                v => v.length <= 20 || 'Name must be less than 20 characters',
+                v => v.length <= 40 || 'Name must be less than 40 characters',
                 v =>
-                    /^[a-zA-Z0-9]+$/.test(v) ||
-                    'Please use alphanumerics charachters only (0-9 and a-z)',
+                    /^[a-zA-Z0-9]+\.[a-zA-Z0-9]+$/.test(v) || 
+                    'Please use alphanumerics charachters only (0-9 and a-z). Use a dot (.) in your double name. ',
+                v => v.indexOf('.3bot') === -1 || '.3bot suffix is not allowed',
             ],
             userNameRules: [
                 v => !!v || 'Your name is required',
