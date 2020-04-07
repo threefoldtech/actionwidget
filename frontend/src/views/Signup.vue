@@ -20,10 +20,11 @@
                             validate-on-blur
                             :rules="threeBotNameRules"
                             suffix=".3bot"
-                            label="3Bot Name"
+                            label="Double name"
                             required
                             persistent-hint
                         ></v-text-field>
+                        <p v-if="doubleNameExist" class="red--text" >This double name is already in use. Please choose another double name.</p>
                         <v-checkbox
                             v-model="internetCapacity"
                             label="I want to learn more about how I can provide Internet capacity to people around me"
@@ -109,6 +110,7 @@
                 //v => /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/.test(v) || 'Name must be valid',
             ],
             loading: false,
+            doubleNameExist: false,
         }),
         computed: {
             signupEmail: {
@@ -174,18 +176,24 @@
                     return;
                 }
                 this.loading = true;
-
-                const response = await axios.put(`/api/user`, {
-                    email_address: this.signupEmail,
-                    name: this.userName,
-                    double_name:
-                        this.reserve_3bot === true ? this.threeBotName : '',
-                    internet_capacity: this.internetCapacity,
-                    deploy_solutions: this.ITSolutions,
-                });
-                if (!response.data.success) {
-                    await router.push('error');
-                    return;
+                try{
+                    const response = await axios.put(`/api/user`, {
+                        email_address: this.signupEmail,
+                        name: this.userName,
+                        double_name:
+                            this.reserve_3bot === true ? this.threeBotName : null,
+                        internet_capacity: this.internetCapacity,
+                        deploy_solutions: this.ITSolutions,
+                    });
+                    if (!response.data.success) {
+                        await router.push('error');
+                        return;
+                    }
+                }catch(e){
+                    if(e.response.status === 409){
+                        this.reserve_3bot = true;
+                        return
+                    }
                 }
                 await router.push('thankyou');
             },
